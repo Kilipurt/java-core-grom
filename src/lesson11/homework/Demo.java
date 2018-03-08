@@ -1,6 +1,5 @@
 package lesson11.homework;
 
-import java.util.Arrays;
 import java.util.Date;
 
 public class Demo {
