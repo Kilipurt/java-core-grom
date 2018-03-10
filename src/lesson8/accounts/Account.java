@@ -11,18 +11,27 @@ public class Account {
         this.moneyAmount = moneyAmount;
     }
 
-    void depositMoney(int amount){
-        moneyAmount += amount;
+    public void depositMoney(int amount) {
+        if (amount >= 0)
+            moneyAmount += amount;
     }
 
-    void depositMoney(){
+    public void depositMoney() {
         moneyAmount += 1000;
         System.out.println("deposit was successful");
     }
 
-    void changeOwnerName(String newOwnerName){
-        ownerName = newOwnerName;
+    public void changeOwnerName(String newOwnerName) {
+        if (newOwnerName != null)
+            ownerName = newOwnerName;
     }
 
-
+    @Override
+    public String toString() {
+        return "Account{" +
+                "bankName='" + bankName + '\'' +
+                ", ownerName='" + ownerName + '\'' +
+                ", moneyAmount=" + moneyAmount +
+                '}';
+    }
 }

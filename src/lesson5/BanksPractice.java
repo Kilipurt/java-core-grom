@@ -16,23 +16,25 @@ public class BanksPractice {
         System.out.println(withdraw(names, balances, "Andrey", 300));
     }
 
-    static int withdraw(String[] clients, int[] balances, String client, int amount){
+    public static int withdraw(String[] clients, int[] balances, String client, int amount) {
         int clientIndex = 0;
-        for(String cl : clients){
-            if(cl == client){
+        for (String cl : clients) {
+            if (cl == client) {
                 break;
             }
             clientIndex++;
         }
-        if(balances[clientIndex] >= amount){
+        if (clientIndex >= clients.length)
+            return -1;
+        if (balances[clientIndex] >= amount) {
             balances[clientIndex] -= amount;
             return balances[clientIndex];
-        }else{
+        } else {
             return -1;
         }
     }
 
-    static String[] findClientsByBalance(String[] clients, int[] balances, int n) {
+    public static String[] findClientsByBalance(String[] clients, int[] balances, int n) {
 
         int count = 0;
         for (int balance : balances) {
@@ -54,7 +56,7 @@ public class BanksPractice {
         return results;
     }
 
-    static String[] findClientsWithNegativeBalance(String[] clients, int[] balances) {
+    public static String[] findClientsWithNegativeBalance(String[] clients, int[] balances) {
 
         int count = 0;
         for (int balance : balances) {
@@ -76,22 +78,28 @@ public class BanksPractice {
         return results;
     }
 
-    static void depositMoney(String[] clients, int[] balances, String client, int money) {
+    public static void depositMoney(String[] clients, int[] balances, String client, int money) {
+        if (findClientIndexByName(clients, client) == -1 || money <= 0)
+            return;
         balances[findClientIndexByName(clients, client)] += calculateDepositAmountAfterCommission(money);
     }
 
-    static int findClientIndexByName(String[] clients, String client){
+    public static int findClientIndexByName(String[] clients, String client) {
+        boolean k = false;
         int clientIndex = 0;
-        for(String cl : clients){
-            if(cl == client){
+        for (String cl : clients) {
+            if (cl == client) {
+                k = true;
                 break;
             }
             clientIndex++;
         }
+        if (!k)
+            return -1;
         return clientIndex;
     }
 
-    static int calculateDepositAmountAfterCommission(int money){
-        return money <=100 ? (int)(money - money*0.02) : (int) (money - money*0.01);
+    public static int calculateDepositAmountAfterCommission(int money) {
+        return money <= 100 ? (int) (money - money * 0.02) : (int) (money - money * 0.01);
     }
 }

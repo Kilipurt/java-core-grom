@@ -26,13 +26,9 @@ public class Controller {
     }
 
     public Room[] check(API api1, API api2) {
-
-        Room[] allRoomsApi1 = api1.getAll();
-        Room[] allRoomsApi2 = api2.getAll();
-
         int count = 0;
-        for (Room room : allRoomsApi1) {
-            for (Room room1 : allRoomsApi2) {
+        for (Room room : api1.getAll()) {
+            for (Room room1 : api2.getAll()) {
                 if (room.getPersons() == room1.getPersons() && room.getPrice() == room1.getPrice() && room.getHotelName() == room1.getHotelName() && room.getCityName() == room1.getCityName()) {
                     count++;
                 }
@@ -42,8 +38,8 @@ public class Controller {
         Room[] result = new Room[count];
 
         int index = 0;
-        for (Room room : allRoomsApi1) {
-            for (Room room1 : allRoomsApi2) {
+        for (Room room : api1.getAll()) {
+            for (Room room1 : api2.getAll()) {
                 if (room.getPersons() == room1.getPersons() && room.getPrice() == room1.getPrice() && room.getHotelName() == room1.getHotelName() && room.getCityName() == room1.getCityName()) {
                     result[index] = room;
                     index++;

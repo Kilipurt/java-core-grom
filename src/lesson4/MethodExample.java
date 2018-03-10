@@ -8,19 +8,14 @@ public class MethodExample {
         System.out.println(min(increaser(10, 5), 11));
     }
 
-    public static int increaser(int a, int index){
+    public static long increaser(long a, int index) {
         System.out.println("method invoked");
         a += index;
         System.out.println("method before return");
         return a;
     }
 
-    public static int min(int a, int b){
-        /*if(a < b)
-            return a;
-        else
-            return b;*/
-
+    public static long min(long a, long b) {
         return a < b ? a : b;
     }
 }

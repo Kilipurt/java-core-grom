@@ -17,11 +17,22 @@ public class Message extends BaseEntity{
         this.message = message;
     }
 
-    void setDateRead(){
+    public void setDateRead(){
         dateRead = new Date();
     }
 
-    boolean isRead(){
+    public boolean isRead(){
         return dateRead == null;
+    }
+
+    @Override
+    public String toString() {
+        return "Message{" +
+                "userFrom=" + userFrom +
+                ", userTo=" + userTo +
+                ", dateSent=" + dateSent +
+                ", dateRead=" + dateRead +
+                ", message='" + message + '\'' +
+                '}';
     }
 }

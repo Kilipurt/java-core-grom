@@ -1,6 +1,6 @@
 package lesson8.phones;
 
-public class Android extends Phone{
+public class Android extends Phone {
     String androidVersion;
     int screenSize;
 
@@ -13,7 +13,7 @@ public class Android extends Phone{
         this.secretDeviceCode = secretDeviceCode;
     }
 
-    void installNewAndroidVersion() {
+    public void installNewAndroidVersion() {
         System.out.println("installNewAndroidVersion invoked...");
     }
 }

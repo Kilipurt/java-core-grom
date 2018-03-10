@@ -8,8 +8,6 @@ public class Car {
     double weight;
     int horsePower;
 
-    //test commit
-
     public Car(int price, int yearOfManufacturing, String ownerName) {
         this.price = price;
         this.yearOfManufacturing = yearOfManufacturing;

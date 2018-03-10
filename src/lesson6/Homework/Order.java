@@ -1,4 +1,4 @@
-package lesson6;
+package lesson6.Homework;
 
 import java.util.Date;
 
@@ -25,20 +25,35 @@ public class Order {
     public Order() {
     }
 
-    void confirmOrder(){
-        if(!isConfirmed) {
+    void confirmOrder() {
+        if (!isConfirmed) {
             isConfirmed = true;
             dateConfirmed = new Date();
         }
     }
 
-    boolean checkPrice(){
+    boolean checkPrice() {
         return price > 1000;
     }
-    boolean isValidType(){
-        if(type == "Buy" || type == "Sale")
+
+    boolean isValidType() {
+        if (type == "Buy" || type == "Sale")
             return true;
         else
             return false;
+    }
+
+    @Override
+    public String toString() {
+        return "Order{" +
+                "id=" + id +
+                ", price=" + price +
+                ", dateCreated=" + dateCreated +
+                ", isConfirmed=" + isConfirmed +
+                ", dateConfirmed=" + dateConfirmed +
+                ", city='" + city + '\'' +
+                ", country='" + country + '\'' +
+                ", type='" + type + '\'' +
+                '}';
     }
 }

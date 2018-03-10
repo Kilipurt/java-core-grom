@@ -1,6 +1,6 @@
 package lesson8.phones;
 
-public class IPhone extends Phone{
+public class IPhone extends Phone {
     int price;
     double weight;
     String countryProduced;
@@ -13,7 +13,7 @@ public class IPhone extends Phone{
         this.fingerPrint = fingerPrint;
     }
 
-    void deleteIPhoneFromDb() {
+    public void deleteIPhoneFromDb() {
         System.out.println("deleteIPhoneFromDb invoked...");
     }
 }

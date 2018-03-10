@@ -1,8 +1,8 @@
-package lesson6;
+package lesson6.Homework;
 
 import java.util.Date;
 
-public class DemoHomeWork {
+public class DemoHomework {
     Order createOrder(){
         Order orderObject = new Order(100, new Date(), false, null, "Dnepr", "Ukraine", "Buy");
         return orderObject;

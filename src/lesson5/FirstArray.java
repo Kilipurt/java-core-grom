@@ -27,11 +27,11 @@ public class FirstArray {
 
         System.out.println(secondArray[5]);
 
-        for(int element : secondArray){
+        for (int element : secondArray) {
             System.out.println(element);
         }
 
-        for(int i = 0; i < firstArray.length; i++){
+        for (int i = 0; i < firstArray.length; i++) {
             int element = firstArray[i];
             System.out.println(element);
         }

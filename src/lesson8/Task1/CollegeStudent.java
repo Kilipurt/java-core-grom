@@ -1,6 +1,6 @@
 package lesson8.Task1;
 
-public class CollegeStudent extends Student{
+public class CollegeStudent extends Student {
     String collegeName;
     int rating;
     long id;

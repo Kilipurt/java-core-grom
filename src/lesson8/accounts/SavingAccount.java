@@ -9,7 +9,7 @@ public class SavingAccount extends Account {
     }
 
     @Override
-    void changeOwnerName(String newOwnerName) {
+    public void changeOwnerName(String newOwnerName) {
         if (newOwnerName == "Jack" || newOwnerName == "Ann")
             ownerName = newOwnerName;
         else

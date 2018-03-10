@@ -1,6 +1,6 @@
 package lesson4;
 
-public class Task {
+public class Homework {
     public static void main(String[] args) {
         short a = 0;
         short b = 10;
@@ -31,7 +31,7 @@ public class Task {
     public static long sum(int from, int to){
         long sum1 = 0;
         if(from <= to) {
-            for (int i = from; i <= to; i++) {
+            for (long i = from; i <= to; i++) {
                 sum1 += i;
             }
         }

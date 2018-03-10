@@ -8,8 +8,8 @@ public class CheckingAccount extends Account {
         this.limitOFExpenses = limitOFExpenses;
     }
 
-    void withdraw(int amount) {
-        if (amount > limitOFExpenses)
+    public void withdraw(int amount) {
+        if (amount > limitOFExpenses || amount < 0)
             return;
         moneyAmount -= amount;
     }

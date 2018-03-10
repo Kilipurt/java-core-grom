@@ -1,6 +1,6 @@
 package lesson8.ads;
 
-public class HouseAd extends Ad{
+public class HouseAd extends Ad {
     String ownerName;
     String address;
     double square;
@@ -14,11 +14,11 @@ public class HouseAd extends Ad{
         this.floors = floors;
     }
 
-    boolean checkOwnerOfAd(){
+    public boolean checkOwnerOfAd() {
         Owners owners = new Owners();
 
         for (String owner : owners.owners) {
-            if(ownerName == owner)
+            if (ownerName == owner)
                 return true;
         }
 

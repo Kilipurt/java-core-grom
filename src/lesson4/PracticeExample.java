@@ -31,7 +31,6 @@ public class PracticeExample {
     }
 
     public static double average(int a, int b) {
-        //2 - 5 : {2, 3, 4, 5} = b - a +1
 
         int sum = 0;
         for (int i = a; i <= b; i++) {
