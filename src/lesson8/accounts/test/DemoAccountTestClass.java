@@ -8,7 +8,7 @@ public class DemoAccountTestClass {
         Account account = new Account("euBank", "Ann", 100);
 
         //depositMoney(int amount)
-        //добавлять на счет указаную сумму +
+        //добавляет на счет указаную сумму +
         //если сумма отрицательная +
 
         account.depositMoney(100);
@@ -20,15 +20,15 @@ public class DemoAccountTestClass {
         System.out.println(account.toString());
 
         //depositMoney()
-        //добавлять на счет 1000 +
-        //выводить сообщение об успешности +
+        //добавляет на счет 1000 +
+        //выводит сообщение об успешности +
 
         account.depositMoney();
 
         System.out.println(account.toString());
 
         //changeOwnerName(String newOwnerName)
-        //менять имя владельца +
+        //меняет имя владельца +
         //если имя null +
 
         account.changeOwnerName("Jack");

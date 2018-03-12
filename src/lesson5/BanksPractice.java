@@ -17,6 +17,10 @@ public class BanksPractice {
     }
 
     public static int withdraw(String[] clients, int[] balances, String client, int amount) {
+
+        if (clients == null || balances == null)
+            return -1;
+
         int clientIndex = 0;
         for (String cl : clients) {
             if (cl == client) {
@@ -35,6 +39,9 @@ public class BanksPractice {
     }
 
     public static String[] findClientsByBalance(String[] clients, int[] balances, int n) {
+
+        if (clients == null || balances == null)
+            return null;
 
         int count = 0;
         for (int balance : balances) {
@@ -57,6 +64,9 @@ public class BanksPractice {
     }
 
     public static String[] findClientsWithNegativeBalance(String[] clients, int[] balances) {
+
+        if (clients == null || balances == null)
+            return null;
 
         int count = 0;
         for (int balance : balances) {
@@ -85,6 +95,10 @@ public class BanksPractice {
     }
 
     public static int findClientIndexByName(String[] clients, String client) {
+
+        if (clients == null)
+            return -1;
+
         boolean k = false;
         int clientIndex = 0;
         for (String cl : clients) {

@@ -5,7 +5,7 @@ public class DemoCheckerTestClass {
         //checkCompanyName(String companyName)
         //проверяет имя компании +
         //если companyNamesValidatedCount больше 10 +
-        //если имя компании "Google" или "Amazon"
+        //если имя компании "Google" или "Amazon" +
 
         Checker checker = new Checker();
         System.out.println(checker.companyNamesValidatedCount);

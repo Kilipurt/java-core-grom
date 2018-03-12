@@ -7,7 +7,8 @@ public class DemoSavingAccountTestClass {
         SavingAccount savingAccount = new SavingAccount("SomeBank", "Denis", 1000, 50);
 
         //changeOwnerName(String newOwnerName)
-        //меняет имя владельца только на "Jack" или "Ann", в другом случае выводит сообщение о неудаче +
+        //меняет имя владельца +
+        //если имя не "Jack" или "Ann" +
 
         savingAccount.changeOwnerName("Jack");
         System.out.println(savingAccount.toString());

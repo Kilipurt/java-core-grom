@@ -2,6 +2,8 @@ package lesson8.Task;
 
 public class Arithmetic {
     public boolean check(int[] array) {
+        if (array == null)
+            return false;
         int min = array[0];
         int max = array[0];
         for (int i : array) {

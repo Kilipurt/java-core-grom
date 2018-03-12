@@ -8,6 +8,9 @@ public class ArraysPractice {
     }
 
     public static int maxElement(int[] array) {
+        if (array == null)
+            return 0;
+
         int max = array[0];
 
         for (int el : array) {
@@ -21,9 +24,11 @@ public class ArraysPractice {
     public static int nCount(int[] array, int n) {
         int count = 0;
 
-        for (int el : array) {
-            if (el == n)
-                count++;
+        if (array != null) {
+            for (int el : array) {
+                if (el == n)
+                    count++;
+            }
         }
 
         return count;

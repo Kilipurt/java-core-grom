@@ -13,6 +13,7 @@ public class DemoHomeworkTestClass {
         //сортировка массива в порядке возрастания +
         //если массив пустой +
         //если массив не полный +
+        //если массив null +
 
         System.out.println(Arrays.toString(Homework.sortAscending(array)));
 
@@ -24,12 +25,15 @@ public class DemoHomeworkTestClass {
 
         System.out.println(Arrays.toString(Homework.sortAscending(array)));
 
+        System.out.println(Homework.sortAscending(null));
+
         int[] array1 = {0, 5, 1, -8, 6, 9, 10};
 
         //sortDescending(int[])
         //сортировка массива в порядке убывания +
         //если массив пустой +
         //если массив не полный +
+        //если массив null +
 
         System.out.println(Arrays.toString(Homework.sortDescending(array1)));
 
@@ -40,12 +44,15 @@ public class DemoHomeworkTestClass {
         array1[2] = 10;
         System.out.println(Arrays.toString(Homework.sortDescending(array1)));
 
+        System.out.println(Homework.sortDescending(null));
+
         int[] array2 = {0, 5, 0, -8, 6, 9, 10};
 
         //uniqueCount(int[])
         //считает количество вхождений уникальных чисел +
         //если массив пустой +
         //если массив не полный +
+        //если массив null +
 
         System.out.println(Homework.uniqueCount(array2));
 
@@ -55,5 +62,7 @@ public class DemoHomeworkTestClass {
         array2[0] = 1;
         array2[2] = 5;
         System.out.println(Homework.uniqueCount(array2));
+
+        System.out.println(Homework.uniqueCount(null));
     }
 }

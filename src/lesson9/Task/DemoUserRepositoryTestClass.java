@@ -13,6 +13,7 @@ public class DemoUserRepositoryTestClass {
         //getUserNames()
         //возвращает массив с именами юзеров +
         //если массив не полный +
+        //если массив null +
 
         UserRepository ur = new UserRepository(usAr);
         System.out.println(Arrays.toString(ur.getUserNames()));
@@ -22,26 +23,36 @@ public class DemoUserRepositoryTestClass {
         UserRepository ur1 = new UserRepository(usAr1);
         System.out.println(Arrays.toString(ur1.getUserNames()));
 
+        UserRepository ur2 = new UserRepository(null);
+        System.out.println(ur2.getUserNames());
+
         //getUserIds()
         //возвращает массив с Id юзеров +
         //если массив не полный +
+        //если массив null +
 
         System.out.println(Arrays.toString(ur.getUserIds()));
 
         System.out.println(Arrays.toString(ur1.getUserIds()));
 
+        System.out.println(ur2.getUserIds());
+
         //getUserNameById(long id)
         //ищет имя юзера по id +
         //если юзера такого нет +
+        //если массив null +
 
         System.out.println(ur.getUserNameById(1));
 
         System.out.println(ur.getUserNameById(100));
 
+        System.out.println(ur2.getUserNameById(1));
+
         //getUserByName(String name)
         //ищет юзера за именем +
         //если такого юзера нет +
         //если имя юзера null +
+        //если массив null +
 
         System.out.println(ur.getUserByName("u11").toString());
 
@@ -49,33 +60,45 @@ public class DemoUserRepositoryTestClass {
 
         System.out.println(ur.getUserByName(null));
 
+        System.out.println(ur2.getUserByName("u11"));
+
         //getUserById(long id)
         //ищет юзера за id +
         //если такого юзера нет +
+        //если массив null +
 
         System.out.println(ur.getUserById(1).toString());
 
         System.out.println(ur.getUserById(12));
 
+        System.out.println(ur2.getUserById(1));
+
         //getUserBySessionId(String sessionId)
         //ищет юзера за sessionId +
         //если такого юзера нет +
+        //если массив null +
 
         System.out.println(ur.getUserBySessionId("rwg2w").toString());
 
         System.out.println(ur.getUserBySessionId(""));
 
+        System.out.println(ur2.getUserBySessionId("f"));
+
         //findById(long id)
         //ищет юзера по id +
         //если такого юзера нет +
+        //если массив null +
 
         System.out.println(ur.findById(1).toString());
 
         System.out.println(ur.findById(12));
 
+        System.out.println(ur2.findById(1));
+
         //delete(long id)
         //удаляет юзера по id +
         //если такого юзера нет +
+        //если массив null +
 
         System.out.println(Arrays.toString(ur.getUsers()));
 
@@ -86,18 +109,21 @@ public class DemoUserRepositoryTestClass {
         ur.delete(1);
 
         System.out.println(Arrays.toString(ur.getUsers()));
+
+        ur2.delete(1);
 
         //save(User user)
         //сохранение юзера +
         //сохранение того же юзера +
         //когда нет места в массиве +
         //когда сохраняем null +
+        //если массив null +
 
-        lesson13.UserRepository userRepository = new lesson13.UserRepository();
+        UserRepository userRepository = new UserRepository(usAr);
 
         System.out.println(Arrays.toString(userRepository.getUsers()));
 
-        lesson13.User user = new lesson13.User(1001, "Ann", "1w21212");
+        User user = new User(1001, "Ann", "1w21212");
         userRepository.save(user);
 
         System.out.println(Arrays.toString(userRepository.getUsers()));
@@ -108,7 +134,7 @@ public class DemoUserRepositoryTestClass {
 
         int n = 15;
         while (n > 0) {
-            lesson13.User user1 = new lesson13.User(n, "Ann", "1w21212");
+            User user1 = new User(n, "Ann", "1w21212");
             System.out.println(userRepository.save(user1));
             n--;
         }
@@ -117,22 +143,27 @@ public class DemoUserRepositoryTestClass {
 
         userRepository.save(null);
 
+        ur2.save(user);
+
         //update(User user)
         //обновление юзера +
         //когда нет юзера на обновление +
         //когда обновляем null +
+        //если массив null +
 
-        user = new lesson13.User(1001, "Ann", "eretertert");
+        user = new User(1001, "Ann", "eretertert");
         userRepository.update(user);
 
         System.out.println(Arrays.toString(userRepository.getUsers()));
 
-        user = new lesson13.User(9999, "Ann", "eretertert");
+        user = new User(9999, "Ann", "eretertert");
         System.out.println(userRepository.update(user));
         System.out.println(Arrays.toString(userRepository.getUsers()));
 
         System.out.println(userRepository.update(null));
         System.out.println(Arrays.toString(userRepository.getUsers()));
+
+        System.out.println(ur2.update(user));
 
     }
 }

@@ -13,6 +13,8 @@ public class Homework {
     }
 
     public static int[] sortAscending(int[] array) {
+        if (array == null)
+            return null;
         for (int i = array.length - 1; i > 0; i--) {
             for (int j = 0; j < i; j++) {
                 if (array[j] > array[j + 1]) {
@@ -26,6 +28,8 @@ public class Homework {
     }
 
     public static int[] sortDescending(int[] array) {
+        if (array == null)
+            return null;
         for (int i = array.length - 1; i > 0; i--) {
             for (int j = 0; j < i; j++) {
                 if (array[j] < array[j + 1]) {
@@ -39,6 +43,8 @@ public class Homework {
     }
 
     public static int uniqueCount(int[] array) {
+        if (array == null)
+            return -1;
         int count = 0;
         for (int i = 0; i < array.length; i++) {
             for (int j = i + 1; j < array.length; j++) {

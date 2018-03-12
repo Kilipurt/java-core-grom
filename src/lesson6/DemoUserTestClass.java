@@ -10,19 +10,19 @@ public class DemoUserTestClass {
         System.out.println(user.toString());
 
         //login()
-        //изменять дату на новую +
+        //изменяет дату на новую +
         user.login();
 
         System.out.println(user.toString());
 
         //increaseAge()
-        //увеличивать возраст на 1 +
+        //увеличивает возраст на 1 +
         user.increaseAge();
 
         System.out.println(user.toString());
 
         //isActive(boolean status)
-        //изменять статус активности +
+        //изменяет статус активности +
         user.isActive(true);
 
         System.out.println(user.toString());

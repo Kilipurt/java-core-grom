@@ -19,9 +19,12 @@ public class DemoAdderTestClass {
 
         //check(int[] array)
         //проверяет больше ли сумма максимального и минимального элементов массива за 100 +
+        //если массив null +
 
         System.out.println(adder.check(array));
 
         System.out.println(adder.check(array1));
+
+        System.out.println(adder.check(null));
     }
 }

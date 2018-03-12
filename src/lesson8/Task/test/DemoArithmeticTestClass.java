@@ -10,9 +10,12 @@ public class DemoArithmeticTestClass {
 
         //check(int[] array)
         //проверяет больше ли сумма максимального и минимального элементов массива за 100 +
+        //если массив null +
 
         System.out.println(arithmetic.check(array));
 
         System.out.println(arithmetic.check(array1));
+
+        System.out.println(arithmetic.check(null));
     }
 }

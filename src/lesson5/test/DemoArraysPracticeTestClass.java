@@ -10,15 +10,20 @@ public class DemoArraysPracticeTestClass {
         //maхElement(int[])
         //поиск максимального элемента массива +
         //если массив пустой +
+        //если массив null +
 
         System.out.println(ArraysPractice.maxElement(array));
 
         int[] array1 = new int[5];
         System.out.println(ArraysPractice.maxElement(array1));
 
+        int[] array2 = null;
+        System.out.println(ArraysPractice.maxElement(array2));
+
         //nCount(int[], int)
         //количество вхождений числа в массив +
         //если массив пустой +
+        //если массив null +
 
         array1 = new int[5];
         System.out.println(ArraysPractice.nCount(array1, 5));
@@ -27,5 +32,7 @@ public class DemoArraysPracticeTestClass {
             array1[i] = 5;
         }
         System.out.println(ArraysPractice.nCount(array1, 5));
+
+        System.out.println(ArraysPractice.nCount(array2, 5));
     }
 }

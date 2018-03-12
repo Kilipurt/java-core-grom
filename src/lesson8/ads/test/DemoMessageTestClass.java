@@ -13,11 +13,13 @@ public class DemoMessageTestClass {
 
         //setDateRead()
         //меняет дату прочтения на текущую +
+
         message.setDateRead();
         System.out.println(message.toString());
 
         //isRead()
-        //проверяет было ли прочтено письмо, путем проверки даты прочтения
+        //проверяет было ли прочтено письмо, путем проверки даты прочтения +
+
         System.out.println(message.isRead());
 
         System.out.println(message1.isRead());

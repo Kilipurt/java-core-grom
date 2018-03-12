@@ -8,7 +8,8 @@ public class DemoCheckingAccountTestClass {
         CheckingAccount checkingAccount = new CheckingAccount("euBank", "Ann", 1000, 500);
 
         //withdraw(int amount)
-        //снимает средства со счета, если сумма не превышает лимит +
+        //снимает средства со счета +
+        //если сумма превышает лимит +
         //если сумма отрицательная +
 
         checkingAccount.withdraw(100);
