@@ -1,25 +1,30 @@
 package lesson11.biginterfaceexample;
 
-public class FileReader implements Readable{
+public class FileReader implements Readable {
 
     @Override
     public void readFilesFromStorage(Storage storage) {
-
+        if(storage == null || storage.getFiles() == null)
+            return;
         printFile(findMaxSizeFile(storage.getFiles()));
     }
 
-    private File findMaxSizeFile(File[] files){
+    public File findMaxSizeFile(File[] files) {
+        if(files == null)
+            return null;
         File maxSizeFile = files[0];
 
-        for(File file : files){
-            if(file != null && file.getSize() > maxSizeFile.getSize()) {
+        for (File file : files) {
+            if (file != null && file.getSize() > maxSizeFile.getSize()) {
                 maxSizeFile = file;
             }
         }
         return maxSizeFile;
     }
 
-    private void printFile(File file){
+    public void printFile(File file) {
+        if(file == null)
+            return;
         System.out.println("max file will be printed now...");
 
         System.out.println(file.getName());

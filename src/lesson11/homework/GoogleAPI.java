@@ -10,6 +10,8 @@ public class GoogleAPI implements API {
 
     @Override
     public Room[] findRooms(int price, int persons, String city, String hotel) {
+        if (rooms == null)
+            return null;
         int count = 0;
         for (Room room : rooms) {
             if (room != null && room.getPersons() == persons && room.getCityName() == city

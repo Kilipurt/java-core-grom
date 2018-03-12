@@ -24,7 +24,7 @@ public class Main {
         operationsWithUser(bankSystem, userOfChinaBank2, userOfChinaBank1, 40, 1000, 40);
     }
 
-    private static void operationsWithUser(BankSystem bankSystem, User fromUser, User toUser, int amountOfWithdraw, int amountOfFund, int amountOfTransfer){
+    private static void operationsWithUser(BankSystem bankSystem, User fromUser, User toUser, int amountOfWithdraw, int amountOfFund, int amountOfTransfer) {
         bankSystem.withdraw(fromUser, amountOfWithdraw);
         bankSystem.fund(fromUser, amountOfFund);
         bankSystem.paySalary(fromUser);

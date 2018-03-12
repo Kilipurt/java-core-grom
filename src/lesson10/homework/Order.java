@@ -79,6 +79,21 @@ public abstract class Order {
         this.totalPrice = totalPrice;
     }
 
+    @Override
+    public String toString() {
+        return "Order{" +
+                "itemName='" + itemName + '\'' +
+                ", dateCreated=" + dateCreated +
+                ", dateConfirmed=" + dateConfirmed +
+                ", dateShipped=" + dateShipped +
+                ", shipFromCity='" + shipFromCity + '\'' +
+                ", shipToCity='" + shipToCity + '\'' +
+                ", basePrice=" + basePrice +
+                ", totalPrice=" + totalPrice +
+                ", customerOwned=" + customerOwned +
+                '}';
+    }
+
     public String print() {
         return  "itemName='" + itemName +
                 ", dateCreated=" + dateCreated +

@@ -2,13 +2,17 @@ package lesson10.abstractfirstexample;
 
 public class PostgreSQLDbProvider extends DbProvider{
 
+    public PostgreSQLDbProvider(String dbHost) {
+        super(dbHost);
+    }
+
     @Override
-    void connectToDb(){
+    public void connectToDb(){
 
     }
 
     @Override
-    void disconnectFromDb(){
+    public void disconnectFromDb(){
 
     }
 }

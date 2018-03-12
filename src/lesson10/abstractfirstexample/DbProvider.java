@@ -3,15 +3,15 @@ package lesson10.abstractfirstexample;
 public abstract class DbProvider {
     private String dbHost;
 
-    /*public DbProvider(String dbHost) {
+    public DbProvider(String dbHost) {
         this.dbHost = dbHost;
-    }*/
+    }
 
-    abstract void connectToDb();
+    public abstract void connectToDb();
 
-    abstract void disconnectFromDb();
+    public abstract void disconnectFromDb();
 
-    void printDbHost(){
+    public void printDbHost(){
         System.out.println("DB host is" + dbHost);
     }
 }

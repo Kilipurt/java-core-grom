@@ -7,7 +7,7 @@ public class Child extends Human {
     }
 
     @Override
-    void run() {
+    public void run() {
         System.out.println("Child class is called...");
         super.run();
     }

@@ -8,24 +8,31 @@ public class Controller {
     }
 
     public Room[] requestRooms(int price, int persons, String city, String hotel) {
+        if (apis == null)
+            return null;
         int count = 0;
         for (API api : apis) {
-            count += api.findRooms(price, persons, city, hotel).length;
+            if (api != null)
+                count += api.findRooms(price, persons, city, hotel).length;
         }
 
         Room[] rooms = new Room[count];
 
         int index = 0;
         for (API api : apis) {
-            for (Room room : api.findRooms(price, persons, city, hotel)) {
-                rooms[index] = room;
-                index++;
+            if (api != null) {
+                for (Room room : api.findRooms(price, persons, city, hotel)) {
+                    rooms[index] = room;
+                    index++;
+                }
             }
         }
         return rooms;
     }
 
     public Room[] check(API api1, API api2) {
+        if (api1 == null || api2 == null)
+            return null;
         int count = 0;
         for (Room room : api1.getAll()) {
             for (Room room1 : api2.getAll()) {

@@ -34,4 +34,9 @@ public class ElectronicsOrder extends Order {
         if (getBasePrice() > 1000)
             setTotalPrice(getTotalPrice() - getTotalPrice() * 0.05);
     }
+
+    @Override
+    public String toString() {
+        return super.toString();
+    }
 }

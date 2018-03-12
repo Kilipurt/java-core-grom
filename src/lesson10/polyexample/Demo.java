@@ -11,11 +11,11 @@ public class Demo {
         run(user);
     }
 
-    private static void run(User user){
+    private static void run(User user) {
         user.run();
     }
 
-    private static void run(Human human){
+    private static void run(Human human) {
         human.run();
     }
 }

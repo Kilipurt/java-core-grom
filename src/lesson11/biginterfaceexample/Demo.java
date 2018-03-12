@@ -18,7 +18,7 @@ public class Demo {
         read(storage, simpleReader);
     }
 
-    private static void read(Storage storage, Readable readable){
+    private static void read(Storage storage, Readable readable) {
         readable.readFilesFromStorage(storage);
     }
 }
