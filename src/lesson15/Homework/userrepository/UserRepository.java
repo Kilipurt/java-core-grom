@@ -39,7 +39,7 @@ public class UserRepository {
     public User update(User user) {
         if (users != null && user != null) {
             for (int i = 0; i < users.length; i++) {
-                if (users[i] != null && user.getId() == users[i].getId() && !users[i].equals(user)) {
+                if (users[i] != null && user.getId() == users[i].getId() && !users[i].equals(user) && users[i].hashCode() != user.hashCode()) {
                     users[i] = user;
                     return users[i];
                 }
