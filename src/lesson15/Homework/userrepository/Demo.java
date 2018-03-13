@@ -16,7 +16,7 @@ public class Demo {
 
         System.out.println(ur.save(u2));
 
-        ur.delete(u1);
+        ur.delete(1);
 
         System.out.println(Arrays.toString(usAr));
     }
