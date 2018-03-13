@@ -11,7 +11,7 @@ public class UserRepository {
         if (user != null || users != null) {
 
             for (int i = 0; i < users.length; i++) {
-                if (users[i] != null && users[i].equals(user) && users[i].hashCode() == user.hashCode()) {
+                if (users[i] != null && users[i].equals(user)) {
                     return null;
                 }
             }
@@ -24,16 +24,6 @@ public class UserRepository {
             }
         }
         return null;
-    }
-
-    public void delete(User user) {
-        if (users == null || user == null)
-            return;
-        for (int i = 0; i < users.length; i++) {
-            if (users[i] != null && users[i].equals(user) && users[i].hashCode() == user.hashCode()) {
-                users[i] = null;
-            }
-        }
     }
 
     public User update(User user) {
@@ -63,7 +53,7 @@ public class UserRepository {
         User user = findById(id);
         if(user != null)
         for (int i = 0; i < users.length; i++) {
-            if (users[i] != null && users[i].equals(user) && users[i].hashCode() == user.hashCode()) {
+            if (users[i] != null && users[i].equals(user)) {
                 users[i] = null;
             }
         }
