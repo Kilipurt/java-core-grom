@@ -8,10 +8,10 @@ public class UserRepository {
     }
 
     public User save(User user) {
-        if (users != null && user != null) {
+        if (user != null || users == null) {
 
             for (int i = 0; i < users.length; i++) {
-                if (users[i].equals(user) && users[i].hashCode() == user.hashCode()) {
+                if (users[i] != null && users[i].equals(user) && users[i].hashCode() == user.hashCode()) {
                     return null;
                 }
             }
