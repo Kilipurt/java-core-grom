@@ -11,13 +11,13 @@ public class UserRepository {
         if (user != null || users == null) {
 
             for (int i = 0; i < users.length; i++) {
-                if (users[i] != null && users[i].equals(user) && users[i].hashCode() == user.hashCode()) {
+                if (users[i].equals(null) && users[i].equals(user) && users[i].hashCode() == user.hashCode()) {
                     return null;
                 }
             }
 
             for (int i = 0; i < users.length; i++) {
-                if (users[i] == null) {
+                if (users[i].equals(null)) {
                     users[i] = user;
                     return users[i];
                 }
@@ -30,7 +30,7 @@ public class UserRepository {
         if (users == null || user == null)
             return;
         for (int i = 0; i < users.length; i++) {
-            if (users[i] != null && users[i].equals(user) && users[i].hashCode() == user.hashCode()) {
+            if (users[i].equals(null) && users[i].equals(user) && users[i].hashCode() == user.hashCode()) {
                 users[i] = null;
             }
         }
@@ -39,7 +39,7 @@ public class UserRepository {
     public User update(User user) {
         if (users != null && user != null) {
             for (int i = 0; i < users.length; i++) {
-                if (users[i] != null && user.getId() == users[i].getId()) {
+                if (users[i].equals(null) && user.getId() == users[i].getId()) {
                     users[i] = user;
                     return users[i];
                 }
