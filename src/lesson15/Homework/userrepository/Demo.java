@@ -11,7 +11,8 @@ public class Demo {
         usAr[0] = u1;
         usAr[1] = u2;
 
-        UserRepository ur = new UserRepository(usAr);
+        UserRepository ur = new UserRepository();
+        usAr = ur.getUsers();
 
         System.out.println(ur.save(u2));
 
