@@ -8,16 +8,16 @@ public class UserRepository {
     }
 
     public User save(User user) {
-        if (user != null || users != null) {
+        if (!user.equals(null) || users != null) {
 
             for (int i = 0; i < users.length; i++) {
-                if (users[i] != null && users[i].equals(user)) {
+                if (!users[i].equals(null)&& users[i].equals(user)) {
                     return null;
                 }
             }
 
             for (int i = 0; i < users.length; i++) {
-                if (users[i] == null) {
+                if (users[i].equals(null)) {
                     users[i] = user;
                     return users[i];
                 }
