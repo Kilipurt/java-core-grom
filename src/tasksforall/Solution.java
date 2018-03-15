@@ -5,10 +5,10 @@ import java.util.Arrays;
 public class Solution {
     public static void main(String[] args) {
         String input = "abc";
-        System.out.println(Arrays.toString(findSequences(input)));
+        System.out.println(Arrays.toString(findSubsequences(input)));
     }
 
-    public static String[] findSequences(String input) {
+    public static String[] findSubsequences(String input) {
         char[] arrayOfInputSymbols = input.toCharArray();
 
         int lengthOfInput = input.length();

@@ -1,5 +1,7 @@
 package lesson15.homework.userrepository;
 
+import java.util.Objects;
+
 public class User {
     private long id;
     private String name;
