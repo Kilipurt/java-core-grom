@@ -1,6 +1,4 @@
-package lesson15.Homework.userrepository;
-
-import java.util.Objects;
+package lesson15.homework.userrepository;
 
 public class User {
     private long id;

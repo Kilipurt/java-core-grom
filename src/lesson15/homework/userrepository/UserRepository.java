@@ -1,4 +1,4 @@
-package lesson15.Homework.userrepository;
+package lesson15.homework.userrepository;
 
 public class UserRepository {
     private User[] users = new User[10];
