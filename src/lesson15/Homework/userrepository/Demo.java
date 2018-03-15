@@ -13,6 +13,7 @@ public class Demo {
 
         System.out.println(ur.save(u1));
         System.out.println(ur.save(u2));
+        System.out.println(ur.save(u1));
 
         System.out.println(Arrays.toString(ur.getUsers()));
         ur.delete(1);
