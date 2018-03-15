@@ -1,7 +1,5 @@
 package lesson15.homework.api;
 
-import java.util.Date;
-
 public class GoogleAPI implements API {
 
     private Room[] rooms;
@@ -13,13 +11,11 @@ public class GoogleAPI implements API {
     @Override
     public Room[] findRooms(int price, int persons, String city, String hotel) {
 
-        Room searchedRoom = new Room(-1, price, persons, new Date(), city, hotel);
-
         if (rooms == null)
             return null;
         int count = 0;
         for (Room room : rooms) {
-            if (room != null && room.equals(searchedRoom)) {
+            if (room != null && room.getPrice() == price && room.getPersons() == persons && room.getCityName().equals(city) && room.getHotelName().equals(hotel)) {
                 count++;
             }
         }
@@ -27,7 +23,7 @@ public class GoogleAPI implements API {
         Room[] requiredRooms = new Room[count];
         int index = 0;
         for (Room room : rooms) {
-            if (room != null && room.equals(searchedRoom)) {
+            if (room != null && room.getPrice() == price && room.getPersons() == persons && room.getCityName().equals(city) && room.getHotelName().equals(hotel)) {
                 requiredRooms[index] = room;
                 index++;
             }
