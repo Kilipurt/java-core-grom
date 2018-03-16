@@ -20,7 +20,7 @@ public class StringMethods {
         System.out.println(test.replaceAll("me", "T"));
 
         System.out.println(test);
-        System.out.println(test.contains("meS"));
+        System.out.println(test.contains("mes"));
 
         System.out.println(test);
         String phrase = "Hello there guys";
