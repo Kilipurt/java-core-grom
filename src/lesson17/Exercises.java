@@ -2,7 +2,7 @@ package lesson17;
 
 import java.util.Arrays;
 
-public class Exercise {
+public class Exercises {
     public static void main(String[] args) {
         String test = "There is test str here was here two times or not no test";
 
