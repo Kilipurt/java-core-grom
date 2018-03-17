@@ -110,21 +110,22 @@ public class Solution {
             return false;
 
         String[] firstValidatePart = address.split("://");
-        if (firstValidatePart.length != 2 && !firstValidatePart[0].equals("http") || firstValidatePart.length != 2 && !firstValidatePart[0].equals("https"))
+        if (firstValidatePart.length != 2 && !firstValidatePart[0].equals("http") && !firstValidatePart[0].equals("https"))
             return false;
 
-        String[] domenValidate = firstValidatePart[1].split("\\.");
+        String[] secondValidatePart = firstValidatePart[1].split("\\.");
 
-        if ((domenValidate[0].equals("www") && domenValidate.length != 3)
-                ||(!domenValidate[0].equals("www") && domenValidate.length != 2))
+        if ((secondValidatePart[0].equals("www") && secondValidatePart.length != 3)
+                ||(!secondValidatePart[0].equals("www") && secondValidatePart.length != 2))
             return false;
 
-        if ((domenValidate.length == 2 && !domenValidate[1].equals("com") && !domenValidate[1].equals("org") && !domenValidate[1].equals("net"))
-                || (domenValidate.length == 3 && (!domenValidate[2].equals("com") && !domenValidate[2].equals("org") && !domenValidate[2].equals("net"))))
+        if(secondValidatePart.length == 3)
+            secondValidatePart = new String[]{secondValidatePart[1], secondValidatePart[2]};
+
+        if (!secondValidatePart[1].equals("com") && !secondValidatePart[1].equals("org") && !secondValidatePart[1].equals("net"))
             return false;
 
-        if ((domenValidate.length == 2 && !checkForSpecialCharactersAddress(domenValidate[0]))
-                || (domenValidate.length == 3 && !checkForSpecialCharactersAddress(domenValidate[1])))
+        if (!checkForSpecialCharactersAddress(secondValidatePart[0]))
             return false;
 
         return true;
