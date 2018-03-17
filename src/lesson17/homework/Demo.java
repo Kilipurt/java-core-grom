@@ -14,7 +14,7 @@ public class Demo {
 
         System.out.println(solution.maxWord(test));
         System.out.println(solution.minWord(test));
-        System.out.println(solution.mostCountedWords(test));
+        System.out.println(solution.mostCountedWord(test));
 
         System.out.println(solution.validate(address));
         System.out.println(solution.validate(address1));
