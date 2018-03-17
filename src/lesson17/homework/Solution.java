@@ -110,12 +110,12 @@ public class Solution {
             return false;
 
         String[] firstValidatePart = address.split("://");
-        if (firstValidatePart.length != 2 && !firstValidatePart[0].equals("http") && !firstValidatePart[0].equals("https"))
+        if (firstValidatePart.length != 2 || !firstValidatePart[0].equals("http") && !firstValidatePart[0].equals("https"))
             return false;
 
         String[] secondValidatePart = firstValidatePart[1].split("\\.");
 
-        if ((secondValidatePart[0].equals("www") && secondValidatePart.length != 3)
+        if (secondValidatePart.length == 0 || (secondValidatePart[0].equals("www") && secondValidatePart.length != 3)
                 ||(!secondValidatePart[0].equals("www") && secondValidatePart.length != 2))
             return false;
 

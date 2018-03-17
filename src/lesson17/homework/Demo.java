@@ -3,7 +3,7 @@ package lesson17.homework;
 public class Demo {
     public static void main(String[] args) {
         String test = "erwg  wWerggw rerg rerg rerg rerg rerg rerg rerg.reghjgiuyiuk 1 wWerggw 2321 wWerggw gr4 erwg wWerggw wWerggj   erwg   rerg.reghjgiuyiuk  wWerggw  ";
-        String address = null;
+        String address = "https://www1.com";
         String address1 = "https://ergkerg.org";
         String address2 = "https://www.ergGFkerg.net";
         String address3 = "http://ergke5rg.com";
