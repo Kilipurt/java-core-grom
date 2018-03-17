@@ -2,7 +2,7 @@ package lesson17.homework;
 
 public class Demo {
     public static void main(String[] args) {
-        String test = "erwg wwerggw rerg.reghjgiuyiuk 1 wwerggw 2321 wwerggw gr4 erwg wwerggw wwerggj   erwg   rerg.reghjgiuyiuk  wwerggw  ";
+        String test = "erwg  wWerggw rerg rerg rerg rerg rerg rerg rerg.reghjgiuyiuk 1 wWerggw 2321 wWerggw gr4 erwg wWerggw wWerggj   erwg   rerg.reghjgiuyiuk  wWerggw  ";
         String address = "";
         String address1 = "https://ergkerg.org";
         String address2 = "http://www.ergkerg.net";

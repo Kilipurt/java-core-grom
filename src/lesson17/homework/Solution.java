@@ -79,23 +79,30 @@ public class Solution {
         if (!stringVerification(input))
             return null;
 
-        String[] words = input.split(" ");
+        String[] words = input.trim().split(" ");
+
         int[] countOfDuplicatesOfWord = new int[words.length];
 
-        for (String word : words) {
-            for (int i = 0; i < words.length; i++) {
-                if (checkForSpecialCharacters(word) && word.equals(words[i]))
-                    countOfDuplicatesOfWord[i]++;
+        for (int i = 0; i < words.length; i++) {
+            if(checkForSpecialCharacters(words[i])) {
+                countOfDuplicatesOfWord[i]++;
+                for (int j = i + 1; j < words.length; j++) {
+                    if (words[i].equals(words[j]))
+                        countOfDuplicatesOfWord[i]++;
+                }
             }
         }
 
-        int indexOfMostCountedWord = 0;
-        for (int i = 1; i < words.length; i++) {
-            if (countOfDuplicatesOfWord[i] > countOfDuplicatesOfWord[i - 1])
-                indexOfMostCountedWord = i;
+        int max = countOfDuplicatesOfWord[0];
+        int maxIndex = 0;
+        for (int i = 0; i < countOfDuplicatesOfWord.length; i++) {
+            if (countOfDuplicatesOfWord[i] > max) {
+                max = countOfDuplicatesOfWord[i];
+                maxIndex = i;
+            }
         }
 
-        return countOfDuplicatesOfWord[indexOfMostCountedWord] == 0 ? null : words[indexOfMostCountedWord];
+        return max == 0 ? null : words[maxIndex];
     }
 
     public boolean validate(String address) {
