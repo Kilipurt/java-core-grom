@@ -2,12 +2,12 @@ package lesson17.homework;
 
 public class Solution {
 
-    public boolean stringVerification(String input){
-        return input == null || input.isEmpty() ? false : true;
+    public boolean stringVerification(String input) {
+        return input != null && !input.isEmpty();
     }
 
-    public boolean checkForSpecialCharacters(String input){
-        if(!stringVerification(input))
+    public boolean checkForSpecialCharacters(String input) {
+        if (!stringVerification(input))
             return false;
 
         for (char ch : input.toCharArray()) {
@@ -20,21 +20,21 @@ public class Solution {
 
     public int countWords(String input) {
 
-        if(!stringVerification(input))
+        if (!stringVerification(input))
             return 0;
 
         String[] words = input.trim().split(" ");
 
         int count = 0;
         for (String word : words) {
-            if(checkForSpecialCharacters(word))
+            if (checkForSpecialCharacters(word))
                 count++;
         }
         return count;
     }
 
     public String maxWord(String input) {
-        if(!stringVerification(input))
+        if (!stringVerification(input))
             return null;
 
         String[] words = input.split(" ");
@@ -52,7 +52,7 @@ public class Solution {
     }
 
     public String minWord(String input) {
-        if(!stringVerification(input))
+        if (!stringVerification(input))
             return null;
 
         String[] words = input.split(" ");
@@ -64,7 +64,7 @@ public class Solution {
                 minWord = word;
         }
 
-        if(minWord == null)
+        if (minWord == null)
             return null;
 
         for (String word : words) {
@@ -76,7 +76,7 @@ public class Solution {
     }
 
     public String mostCountedWords(String input) {
-        if(!stringVerification(input))
+        if (!stringVerification(input))
             return null;
 
         String[] words = input.split(" ");
@@ -90,11 +90,12 @@ public class Solution {
         }
 
         int indexOfMostCountedWord = 0;
-        for (int i = 0; i < words.length; i++) {
-            if (countOfDuplicatesOfWord[i + 1] > countOfDuplicatesOfWord[i])
-                indexOfMostCountedWord = i + 1;
+        for (int i = 1; i < words.length; i++) {
+            if (countOfDuplicatesOfWord[i] > countOfDuplicatesOfWord[i - 1])
+                indexOfMostCountedWord = i;
         }
-        return words[indexOfMostCountedWord];
+
+        return countOfDuplicatesOfWord[indexOfMostCountedWord] == 0 ? null : words[indexOfMostCountedWord];
     }
 
     public boolean validate(String address) {
@@ -102,22 +103,35 @@ public class Solution {
             return false;
 
         String[] firstValidatePart = address.split("://");
-        if (firstValidatePart.length > 2)
+        if (firstValidatePart.length != 2 && !firstValidatePart[0].equals("http") || firstValidatePart.length != 2 && !firstValidatePart[0].equals("https"))
             return false;
 
-        if (!firstValidatePart[0].equals("http") && !firstValidatePart[0].equals("https"))
+        String[] domenValidate = firstValidatePart[1].split("\\.");
+
+        if ((domenValidate[0].equals("www") && domenValidate.length != 3)
+                ||(!domenValidate[0].equals("www") && domenValidate.length != 2))
             return false;
 
-        String[] domenValidate = firstValidatePart[1].split(".");
-        if (domenValidate.length > 2)
+        if ((domenValidate.length == 2 && !domenValidate[1].equals("com") && !domenValidate[1].equals("org") && !domenValidate[1].equals("net"))
+                || (domenValidate.length == 3 && (!domenValidate[2].equals("com") && !domenValidate[2].equals("org") && !domenValidate[2].equals("net"))))
             return false;
 
-        if (!domenValidate[1].equals("com") && !domenValidate[1].equals("org") && !domenValidate[1].equals("net"))
+        if ((domenValidate.length == 2 && !checkForSpecialCharactersAddress(domenValidate[0]))
+                || (domenValidate.length == 3 && !checkForSpecialCharactersAddress(domenValidate[1])))
             return false;
 
-        if(!checkForSpecialCharacters(domenValidate[0]))
+        return true;
+    }
+
+    public boolean checkForSpecialCharactersAddress(String input) {
+        if (!stringVerification(input))
             return false;
 
+        for (char ch : input.toCharArray()) {
+            if (!Character.isLetterOrDigit(ch)) {
+                return false;
+            }
+        }
         return true;
     }
 }
