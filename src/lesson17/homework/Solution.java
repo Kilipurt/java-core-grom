@@ -75,7 +75,7 @@ public class Solution {
         return minWord;
     }
 
-    public String mostCountedWords(String input) {
+    public String mostCountedWord(String input) {
         if (!stringVerification(input))
             return null;
 
