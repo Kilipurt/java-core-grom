@@ -39,10 +39,13 @@ public class Solution {
 
         String[] words = input.split(" ");
 
-        String maxWord = words[0];
+        String maxWord = null;
+        int maxWordLength = 0;
         for (String word : words) {
-            if (checkForSpecialCharacters(word) && word.length() > maxWord.length())
+            if (checkForSpecialCharacters(word) && word.length() > maxWordLength) {
                 maxWord = word;
+                maxWordLength = maxWord.length();
+            }
         }
 
         return maxWord;
@@ -54,7 +57,16 @@ public class Solution {
 
         String[] words = input.split(" ");
 
-        String minWord = words[0];
+        String minWord = null;
+
+        for (String word : words) {
+            if (checkForSpecialCharacters(word))
+                minWord = word;
+        }
+
+        if(minWord == null)
+            return null;
+
         for (String word : words) {
             if (checkForSpecialCharacters(word) && word.length() < minWord.length())
                 minWord = word;
