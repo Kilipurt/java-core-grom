@@ -4,21 +4,21 @@ import java.util.Arrays;
 
 public class Exercises {
     public static void main(String[] args) {
-        String test = "There is test str here was here two times or not no test";
+        //String test = "There is test str here was here two times or not no test";
 
-        System.out.println(deleteDuplicates(test));
+        //System.out.println(deleteDuplicates(test));
 
-        System.out.println(Arrays.toString(countDuplicates(test, new String[]{"test", "here", "not"})));
+        //System.out.println(Arrays.toString(countDuplicates(test, new String[]{"test", "here", "not"})));
 
-        String str = "Today is good day... Hello dpsd";
+        String str = "test str here was here two times or not no test";
 
-        System.out.println(replace(str, "is", "that"));
+        System.out.println(replace(str, "here", "PPPPP"));
         System.out.println(replace(str, "o", " "));
         System.out.println(replace(str, "To", "PPPP"));
         System.out.println(replace(str, "lo", "X"));
     }
 
-    public static String deleteDuplicates(String input) {
+    /*public static String deleteDuplicates(String input) {
 
         String[] words = input.split(" ");
 
@@ -53,23 +53,27 @@ public class Exercises {
             }
         }
         return res;
-    }
+    }*/
 
     public static String replace(String input, String target, String replacement) {
+
         int[] indexes = findStartIndexes(input.toCharArray(), target.charAt(0));
 
         if (indexes.length == 0)
             return input;
 
-        for (int index : indexes) {
-            if (checkReplace(input, target, index)) {
-                return replace(input, target, replacement, index);
+        for (int i = 0; i < indexes.length; i++) {
+            if (checkReplaces(input, target, indexes[i])) {
+                input = replace1(input, target, replacement, indexes[i]);
+                for (int j = 0; j < indexes.length; j++) {
+                    indexes[j] = indexes[j] - target.length() + replacement.length();
+                }
             }
         }
         return input;
     }
 
-    private static String replace(String input, String target, String replacement, int index) {
+    private static String replace1(String input, String target, String replacement, int index) {
         char[] res1 = new char[index];
 
         for (int i = 0; i < index; i++) {
@@ -83,7 +87,8 @@ public class Exercises {
         return new String(res1) + replacement + new String(res3);
     }
 
-    private static boolean checkReplace(String input, String target, int index) {
+
+    private static boolean checkReplaces(String input, String target, int index) {
         char[] inputChars = input.toCharArray();
         char[] replaceChars = target.toCharArray();
 
@@ -94,6 +99,7 @@ public class Exercises {
         }
         return true;
     }
+
 
     private static int[] findStartIndexes(char[] inputChars, char beginningChar) {
         int count = 0;
