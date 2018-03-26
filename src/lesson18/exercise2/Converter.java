@@ -8,13 +8,13 @@ public class Converter {
         System.out.println(stringToInt("1050a"));
 
         System.out.println(intToString(111231));
-        System.out.println(stringToInt("11"));
+        System.out.println(stringToInt("aaa"));
 
         System.out.println(intToString(111231));
-        System.out.println(stringToInt("11"));
+        System.out.println(stringToInt(""));
 
         System.out.println(intToString(111231));
-        System.out.println(stringToInt("11"));
+        System.out.println(stringToInt(null));
 
         System.out.println(intToString(111231));
         System.out.println(stringToInt("11"));
