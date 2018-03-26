@@ -84,7 +84,7 @@ public class Solution {
         int[] countOfDuplicatesOfWord = new int[words.length];
 
         for (int i = 0; i < words.length; i++) {
-            if(checkForSpecialCharacters(words[i])) {
+            if (checkForSpecialCharacters(words[i])) {
                 countOfDuplicatesOfWord[i]++;
                 for (int j = i + 1; j < words.length; j++) {
                     if (words[i].equals(words[j]))
@@ -105,34 +105,34 @@ public class Solution {
         return max == 0 ? null : words[maxIndex];
     }
 
-    public boolean validate(String address) {
-        if (!stringVerification(address))
+    public boolean validate(String address){
+        if (address == null || address.isEmpty())
             return false;
 
-        String[] firstValidatePart = address.split("://");
-        if (firstValidatePart.length != 2 || !firstValidatePart[0].equals("http") && !firstValidatePart[0].equals("https"))
+        if (!address.startsWith("http://") && !address.startsWith("https://"))
             return false;
 
-        String[] secondValidatePart = firstValidatePart[1].split("\\.");
-
-        if (secondValidatePart.length == 0 || (secondValidatePart[0].equals("www") && secondValidatePart.length != 3)
-                ||(!secondValidatePart[0].equals("www") && secondValidatePart.length != 2))
+        if (!address.endsWith(".com") && !address.endsWith(".net") && !address.endsWith(".org"))
             return false;
 
-        if(secondValidatePart.length == 3)
-            secondValidatePart = new String[]{secondValidatePart[1], secondValidatePart[2]};
+        address = isValid(address, new String[]{"http://", "https://"});
+        address = isValid(address, new String[]{".net", ".com", ".org"});
 
-        if (!secondValidatePart[1].equals("com") && !secondValidatePart[1].equals("org") && !secondValidatePart[1].equals("net"))
-            return false;
+        return address != null && checkForSpecialCharactersAddress(address);
+    }
 
-        if (!checkForSpecialCharactersAddress(secondValidatePart[0]))
-            return false;
-
-        return true;
+    private String isValid(String address, String[] parts){
+        for(String part : parts){
+            if(address.contains(part)){
+                address = address.replace(part, "");
+                return address;
+            }
+        }
+        return null;
     }
 
     public boolean checkForSpecialCharactersAddress(String input) {
-        if (!stringVerification(input))
+        if (input == null || input.isEmpty())
             return false;
 
         for (char ch : input.toCharArray()) {
