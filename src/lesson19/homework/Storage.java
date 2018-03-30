@@ -83,15 +83,16 @@ public class Storage {
     }
 
     public boolean isEnoughSpaceForTransferAllFiles(Storage storageTo) {
+        if (files == null || storageTo.files == null)
+            return false;
+
         int numberOfFiles = 0;
         int transmittedFilesSize = 0;
 
         for (File file : files) {
-            for(File f : storageTo.files) {
-                if (file != null && file != f) {
-                    numberOfFiles++;
-                    transmittedFilesSize += file.getSize();
-                }
+            if (file != null && !storageTo.isFileContained(file)) {
+                numberOfFiles++;
+                transmittedFilesSize += file.getSize();
             }
         }
 
@@ -102,7 +103,7 @@ public class Storage {
                 numberOfFreeCells++;
         }
 
-        return numberOfFreeCells >= numberOfFiles && transmittedFilesSize <= storageTo.storageSize - storageTo.fileContainedSize();
+        return numberOfFreeCells >= numberOfFiles && transmittedFilesSize <= storageTo.storageSize - storageTo.filesContainedSize();
     }
 
     public void addFile(File file) {
@@ -123,11 +124,11 @@ public class Storage {
         }
     }
 
-    public int fileContainedSize(){
+    public int filesContainedSize() {
         int storageSize = 0;
 
-        for(File file : files){
-            if(file != null)
+        for (File file : files) {
+            if (file != null)
                 storageSize += file.getSize();
         }
 

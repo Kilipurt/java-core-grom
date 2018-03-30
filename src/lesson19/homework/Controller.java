@@ -6,7 +6,7 @@ public class Controller {
         if (storage == null || file == null)
             return;
 
-        boolean isEnoughSpaceForFile = storage.fileContainedSize() + file.getSize() <= storage.getStorageSize();
+        boolean isEnoughSpaceForFile = storage.filesContainedSize() + file.getSize() <= storage.getStorageSize();
 
         if (storage.isFull() || !storage.isTrueFormat(file.getFormat()) || storage.isFileContained(file) || !isEnoughSpaceForFile) {
             throw new Exception("File " + file.getId() + " can not be added to storage " + storage.getId());
@@ -40,9 +40,9 @@ public class Controller {
         if(transmittedFile == null)
             return;
 
-        boolean isEnoughSpaceForFile = storageTo.fileContainedSize() + transmittedFile.getSize() <= storageTo.getStorageSize();
+        boolean isEnoughSpaceForFile = storageTo.filesContainedSize() + transmittedFile.getSize() <= storageTo.getStorageSize();
 
-        if (storageTo.isFull() || !storageTo.isTrueFormat(transmittedFile.getFormat()) || !isEnoughSpaceForFile) {
+        if (storageTo.isFull() || storageTo.isFileContained(transmittedFile) || !storageTo.isTrueFormat(transmittedFile.getFormat()) || !isEnoughSpaceForFile) {
             throw new Exception("File " + id + " was not transmitted to storage " + storageFrom.getId());
         } else {
             storageFrom.deleteFile(transmittedFile);
@@ -67,6 +67,11 @@ public class Controller {
         for (File file : storageFrom.getFiles()) {
             if (file != null && !storageTo.isFileContained(file)) {
                 storageTo.addFile(file);
+            }
+        }
+
+        for(File file : storageFrom.getFiles()){
+            if(file != null){
                 storageFrom.deleteFile(file);
             }
         }
