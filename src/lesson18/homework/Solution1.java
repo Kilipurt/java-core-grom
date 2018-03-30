@@ -30,7 +30,7 @@ public class Solution1 {
         return digits;
     }
 
-    public boolean isDigit(String input) {
+    private boolean isDigit(String input) {
         if (input.isEmpty())
             return false;
 
