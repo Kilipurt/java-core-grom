@@ -30,15 +30,15 @@ public class Demo {
         files1[1] = file2;
         files1[2] = file3;
 
-        File[] files2 = new File[4];
-        files2[0] = file1;
+        File[] files2 = new File[5];
+        files2[0] = file5;
         files2[1] = file6;
         files2[2] = file7;
 
         String[] formatsSupported1 = {"txt", "jpg", "jpeg"};
         String[] formatsSupported2 = {"txt"};
 
-        Storage storage1 = new Storage(1, files1, formatsSupported1, "Ukraine", 42);
+        Storage storage1 = new Storage(1, files1, formatsSupported1, "Ukraine", 28);
         Storage storage2 = new Storage(2, files2, formatsSupported2, "Germany", 28);
 
         Controller controller = new Controller();
@@ -61,8 +61,8 @@ public class Demo {
 //        System.out.println("Test delete() 3:");
 //        testDelete(storage1, null, controller);
 //
-//        System.out.println("Test transferFile() 1:");
-//        testTransferFile(storage1, storage2, 1, controller);
+        System.out.println("Test transferFile() 1:");
+        testTransferFile(storage1, storage2, 5, controller);
 //
 //        System.out.println("Test transferFile() 2:");
 //        testTransferFile(storage1, storage2, 2, controller);
@@ -72,12 +72,12 @@ public class Demo {
 //
 //        System.out.println("Test transferAll() 1:");
 //        testTransferAll(storage1, storage2, controller);
-
-        System.out.println("Test transferAll() 2:");
-        testTransferAll(storage2, storage1, controller);
-
-        System.out.println("Test transferAll() 3:");
-        testTransferAll(null, storage1, controller);
+//
+//        System.out.println("Test transferAll() 2:");
+//        testTransferAll(storage2, storage1, controller);
+//
+//        System.out.println("Test transferAll() 3:");
+//        testTransferAll(null, storage1, controller);
     }
 
     public static void testPut(Storage storage, File file, Controller controller) {

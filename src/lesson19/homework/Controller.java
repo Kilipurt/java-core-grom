@@ -32,21 +32,25 @@ public class Controller {
 
         File transmittedFile = null;
 
-        for (File file : storageFrom.getFiles()) {
-            if (file != null && file.getId() == id)
-                transmittedFile = file;
+        if(storageFrom.getFiles() != null) {
+            for (File file : storageFrom.getFiles()) {
+                if (file != null && file.getId() == id)
+                    transmittedFile = file;
+            }
         }
 
-        if(transmittedFile == null)
-            return;
+        Exception e = new Exception("File " + id + " was not transmitted from storage " + storageFrom.getId() + " to storage " + storageTo.getId());
 
-        boolean isEnoughSpaceForFile = storageTo.filesContainedSize() + transmittedFile.getSize() <= storageTo.getStorageSize();
+        if(transmittedFile == null)
+            throw e;
+
+        boolean isEnoughSpaceForFile = (storageTo.filesContainedSize() + transmittedFile.getSize()) <= storageTo.getStorageSize();
 
         if (storageTo.isFull() || storageTo.isFileContained(transmittedFile) || !storageTo.isTrueFormat(transmittedFile.getFormat()) || !isEnoughSpaceForFile) {
-            throw new Exception("File " + id + " was not transmitted to storage " + storageFrom.getId());
+            throw e;
         } else {
-            storageFrom.deleteFile(transmittedFile);
             storageTo.addFile(transmittedFile);
+            storageFrom.deleteFile(transmittedFile);
         }
     }
 

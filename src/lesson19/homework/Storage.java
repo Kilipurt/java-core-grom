@@ -43,19 +43,16 @@ public class Storage {
 
     public boolean isFull() {
         if (files == null)
-            return false;
+            return true;
 
         boolean isArrayFull = true;
 
-        int storageSize = 0;
         for (File file : files) {
-            if (file != null)
-                storageSize += file.getSize();
-            else if (isArrayFull)
+            if (file == null)
                 isArrayFull = false;
         }
 
-        return isArrayFull || (storageSize == this.storageSize);
+        return isArrayFull || (filesContainedSize() == this.storageSize);
     }
 
     public boolean isTrueFormat(String type) {
