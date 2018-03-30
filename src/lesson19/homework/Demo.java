@@ -43,41 +43,41 @@ public class Demo {
 
         Controller controller = new Controller();
 
-//        System.out.println("Test put() 1:");
-//        testPut(storage1, file4, controller);
-//
-//        System.out.println("Test put() 2:");
-//        testPut(storage1, file8, controller);
-//
-//        System.out.println("Test put() 3:");
-//        testPut(storage1, null, controller);
-//
-//        System.out.println("Test delete() 1:");
-//        testDelete(storage1, file4, controller);
-//
-//        System.out.println("Test delete() 2:");
-//        testDelete(storage1, file5, controller);
-//
-//        System.out.println("Test delete() 3:");
-//        testDelete(storage1, null, controller);
-//
+        System.out.println("Test put() 1:");
+        testPut(storage1, file4, controller);
+
+        System.out.println("Test put() 2:");
+        testPut(storage1, file8, controller);
+
+        System.out.println("Test put() 3:");
+        testPut(storage1, null, controller);
+
+        System.out.println("Test delete() 1:");
+        testDelete(storage1, file4, controller);
+
+        System.out.println("Test delete() 2:");
+        testDelete(storage1, file5, controller);
+
+        System.out.println("Test delete() 3:");
+        testDelete(storage1, null, controller);
+
         System.out.println("Test transferFile() 1:");
         testTransferFile(storage1, storage2, 5, controller);
-//
-//        System.out.println("Test transferFile() 2:");
-//        testTransferFile(storage1, storage2, 2, controller);
-//
-//        System.out.println("Test transferFile() 3:");
-//        testTransferFile(storage1, storage2, 8, controller);
-//
-//        System.out.println("Test transferAll() 1:");
-//        testTransferAll(storage1, storage2, controller);
-//
-//        System.out.println("Test transferAll() 2:");
-//        testTransferAll(storage2, storage1, controller);
-//
-//        System.out.println("Test transferAll() 3:");
-//        testTransferAll(null, storage1, controller);
+
+        System.out.println("Test transferFile() 2:");
+        testTransferFile(storage1, storage2, 2, controller);
+
+        System.out.println("Test transferFile() 3:");
+        testTransferFile(storage1, storage2, 8, controller);
+
+        System.out.println("Test transferAll() 1:");
+        testTransferAll(storage1, storage2, controller);
+
+        System.out.println("Test transferAll() 2:");
+        testTransferAll(storage2, storage1, controller);
+
+        System.out.println("Test transferAll() 3:");
+        testTransferAll(null, storage1, controller);
     }
 
     public static void testPut(Storage storage, File file, Controller controller) {
