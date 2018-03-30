@@ -44,14 +44,13 @@ public class Controller {
         if(transmittedFile == null)
             throw e;
 
-        boolean isEnoughSpaceForFile = (storageTo.filesContainedSize() + transmittedFile.getSize()) <= storageTo.getStorageSize();
-
-        if (storageTo.isFull() || storageTo.isFileContained(transmittedFile) || !storageTo.isTrueFormat(transmittedFile.getFormat()) || !isEnoughSpaceForFile) {
+        try{
+            put(storageTo, transmittedFile);
+        }catch (Exception ex){
             throw e;
-        } else {
-            storageTo.addFile(transmittedFile);
-            storageFrom.deleteFile(transmittedFile);
         }
+
+        storageFrom.deleteFile(transmittedFile);
     }
 
     public void transferAll(Storage storageFrom, Storage storageTo) throws Exception {

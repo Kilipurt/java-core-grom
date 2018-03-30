@@ -7,3 +7,11 @@ public class First {
     }
 }
 
+
+    //boolean isEnoughSpaceForFile = (storageTo.filesContainedSize() + transmittedFile.getSize()) <= storageTo.getStorageSize();
+        /*if (storageTo.isFull() || storageTo.isFileContained(transmittedFile) || !storageTo.isTrueFormat(transmittedFile.getFormat()) || !isEnoughSpaceForFile) {
+            throw e;
+        } else {
+            storageTo.addFile(transmittedFile);
+            storageFrom.deleteFile(transmittedFile);
+        }*/
