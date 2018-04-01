@@ -32,7 +32,7 @@ public class Controller {
 
         File transmittedFile = null;
 
-        if(storageFrom.getFiles() != null) {
+        if (storageFrom.getFiles() != null) {
             for (File file : storageFrom.getFiles()) {
                 if (file != null && file.getId() == id)
                     transmittedFile = file;
@@ -41,12 +41,12 @@ public class Controller {
 
         Exception e = new Exception("File " + id + " was not transmitted from storage " + storageFrom.getId() + " to storage " + storageTo.getId());
 
-        if(transmittedFile == null)
+        if (transmittedFile == null)
             throw e;
 
-        try{
+        try {
             put(storageTo, transmittedFile);
-        }catch (Exception ex){
+        } catch (Exception ex) {
             throw e;
         }
 
@@ -59,11 +59,11 @@ public class Controller {
 
         Exception e = new Exception("Files can not be transmitted from storage " + storageFrom.getId() + " to storage " + storageTo.getId());
 
-        if(!storageFrom.isEnoughSpaceForTransferAllFiles(storageTo))
+        if (!storageFrom.isEnoughSpaceForTransferAllFiles(storageTo))
             throw e;
 
-        for(File file : storageFrom.getFiles()){
-            if(file != null && !storageTo.isTrueFormat(file.getFormat()))
+        for (File file : storageFrom.getFiles()) {
+            if (file != null && !storageTo.isTrueFormat(file.getFormat()))
                 throw e;
         }
 
@@ -73,8 +73,8 @@ public class Controller {
             }
         }
 
-        for(File file : storageFrom.getFiles()){
-            if(file != null){
+        for (File file : storageFrom.getFiles()) {
+            if (file != null) {
                 storageFrom.deleteFile(file);
             }
         }
