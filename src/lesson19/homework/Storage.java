@@ -132,6 +132,16 @@ public class Storage {
         return storageSize;
     }
 
+    public File getFileById(long id){
+        if (files != null) {
+            for (File file : files) {
+                if (file != null && file.getId() == id)
+                    return file;
+            }
+        }
+        return null;
+    }
+
     @Override
     public String toString() {
         return "Storage{" +

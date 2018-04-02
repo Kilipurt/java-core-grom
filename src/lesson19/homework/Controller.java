@@ -16,7 +16,9 @@ public class Controller {
         if (storage == null || file == null)
             return;
 
-        if (!storage.isFileContained(file))
+        File fileToDelete = storage.getFileById(file.getId());
+
+        if (!file.equals(fileToDelete))
             throw new Exception("File " + file.getId() + " can not be found in storage " + storage.getId());
 
         storage.deleteFile(file);
@@ -28,12 +30,7 @@ public class Controller {
 
         File transmittedFile = null;
 
-        if (storageFrom.getFiles() != null) {
-            for (File file : storageFrom.getFiles()) {
-                if (file != null && file.getId() == id)
-                    transmittedFile = file;
-            }
-        }
+        transmittedFile = storageFrom.getFileById(id);
 
         Exception e = new Exception("File " + id + " was not transmitted from storage " + storageFrom.getId() + " to storage " + storageTo.getId());
 
