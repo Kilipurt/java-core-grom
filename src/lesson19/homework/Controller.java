@@ -6,24 +6,20 @@ public class Controller {
         if (storage == null || file == null)
             return;
 
-        boolean isEnoughSpaceForFile = storage.filesContainedSize() + file.getSize() <= storage.getStorageSize();
-
-        if (storage.isFull() || !storage.isTrueFormat(file.getFormat()) || storage.isFileContained(file) || !isEnoughSpaceForFile) {
+        if (storage.isFull(file) || !storage.isTrueFormat(file.getFormat()) || storage.isFileContained(file))
             throw new Exception("File " + file.getId() + " can not be added to storage " + storage.getId());
-        } else {
-            storage.addFile(file);
-        }
+
+        storage.addFile(file);
     }
 
     public void delete(Storage storage, File file) throws Exception {
         if (storage == null || file == null)
             return;
 
-        if (!storage.isFileContained(file)) {
+        if (!storage.isFileContained(file))
             throw new Exception("File " + file.getId() + " can not be found in storage " + storage.getId());
-        } else {
-            storage.deleteFile(file);
-        }
+
+        storage.deleteFile(file);
     }
 
     public void transferFile(Storage storageFrom, Storage storageTo, long id) throws Exception {
