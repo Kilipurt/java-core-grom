@@ -29,7 +29,7 @@ public class Controller {
             return;
 
         File transmittedFile = storageFrom.getFileById(id);
-
+//
         if (transmittedFile == null)
             throw new Exception("File " + id + " was not transmitted from storage " + storageFrom.getId() + " to storage " + storageTo.getId());
 
