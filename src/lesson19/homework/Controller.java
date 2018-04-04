@@ -6,7 +6,7 @@ public class Controller {
         if (storage == null || file == null)
             return;
 
-        if (storage.isFull(file) || !storage.isTrueFormat(file.getFormat()) || storage.isFileContained(file))
+        if (StorageValidator.isFull(storage, file) || !StorageValidator.isTrueFormat(storage, file.getFormat()) || StorageValidator.isFileContained(storage, file))
             throw new Exception("File " + file.getId() + " can not be added to storage " + storage.getId());
 
         storage.addFile(file);
@@ -50,27 +50,10 @@ public class Controller {
         if (storageFrom == null || storageTo == null)
             return;
 
-        Exception e = new Exception("Files can not be transmitted from storage " + storageFrom.getId() + " to storage " + storageTo.getId());
+        if (!StorageValidator.isPossibleToTransferAllFiles(storageFrom, storageTo))
+            throw new Exception("Files can not be transmitted from storage " + storageFrom.getId() + " to storage " + storageTo.getId());
 
-        if (!storageFrom.isEnoughSpaceForTransferAllFiles(storageTo))
-            throw e;
-
-        for (File file : storageFrom.getFiles()) {
-            if (file != null && !storageTo.isTrueFormat(file.getFormat()))
-                throw e;
-        }
-
-        for (File file : storageFrom.getFiles()) {
-            if (file != null && !storageTo.isFileContained(file)) {
-                storageTo.addFile(file);
-            }
-        }
-
-        for (File file : storageFrom.getFiles()) {
-            if (file != null) {
-                storageFrom.deleteFile(file);
-            }
-        }
+        storageFrom.transferAllFiles(storageTo);
     }
 }
 

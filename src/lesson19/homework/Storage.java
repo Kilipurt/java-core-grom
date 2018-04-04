@@ -41,68 +41,6 @@ public class Storage {
         this.storageSize = storageSize;
     }
 
-    public boolean isFull(File file) {
-        if (files == null)
-            return true;
-
-        boolean isEnoughSpaceForFile = filesContainedSize() + file.getSize() > storageSize;
-
-        for (File f : files) {
-            if (f == null)
-                return isEnoughSpaceForFile;
-        }
-
-        return true;
-    }
-
-    public boolean isTrueFormat(String type) {
-        if (type == null || formatsSupported == null)
-            return false;
-
-        for (String format : formatsSupported) {
-            if (type.equals(format))
-                return true;
-        }
-
-        return false;
-    }
-
-    public boolean isFileContained(File file) {
-        if (files == null || file == null)
-            return false;
-
-        for (File f : files) {
-            if (f != null && file.getId() == f.getId())
-                return true;
-        }
-
-        return false;
-    }
-
-    public boolean isEnoughSpaceForTransferAllFiles(Storage storageTo) {
-        if (files == null || storageTo.files == null)
-            return false;
-
-        int numberOfFiles = 0;
-        int transmittedFilesSize = 0;
-
-        for (File file : files) {
-            if (file != null && !storageTo.isFileContained(file)) {
-                numberOfFiles++;
-                transmittedFilesSize += file.getSize();
-            }
-        }
-
-        int numberOfFreeCells = 0;
-
-        for (File file : storageTo.files) {
-            if (file == null)
-                numberOfFreeCells++;
-        }
-
-        return numberOfFreeCells >= numberOfFiles && transmittedFilesSize <= storageTo.storageSize - storageTo.filesContainedSize();
-    }
-
     public void addFile(File file) {
         for (int i = 0; i < files.length; i++) {
             if (files[i] == null) {
@@ -121,6 +59,20 @@ public class Storage {
         }
     }
 
+    public void transferAllFiles(Storage storageTo) {
+        for (File file : files) {
+            if (file != null && !StorageValidator.isFileContained(storageTo, file)) {
+                storageTo.addFile(file);
+            }
+        }
+
+        for (File file : files) {
+            if (file != null) {
+                deleteFile(file);
+            }
+        }
+    }
+
     public int filesContainedSize() {
         int storageSize = 0;
 
@@ -132,7 +84,7 @@ public class Storage {
         return storageSize;
     }
 
-    public File getFileById(long id){
+    public File getFileById(long id) {
         if (files != null) {
             for (File file : files) {
                 if (file != null && file.getId() == id)
