@@ -25,7 +25,7 @@ public class Demo {
             System.err.println(e.getMessage());
         }
 
-        File[] files1 = new File[5];
+        File[] files1 = new File[10];
         files1[0] = file1;
         files1[1] = file2;
         files1[2] = file3;
@@ -38,7 +38,7 @@ public class Demo {
         String[] formatsSupported1 = {"txt", "jpg", "jpeg"};
         String[] formatsSupported2 = {"txt"};
 
-        Storage storage1 = new Storage(1, files1, formatsSupported1, "Ukraine", 28);
+        Storage storage1 = new Storage(1, files1, formatsSupported1, "Ukraine", 100);
         Storage storage2 = new Storage(2, files2, formatsSupported2, "Germany", 28);
 
         Controller controller = new Controller();

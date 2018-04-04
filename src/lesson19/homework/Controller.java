@@ -28,21 +28,12 @@ public class Controller {
         if (storageFrom == null || storageTo == null)
             return;
 
-        File transmittedFile = null;
-
-        transmittedFile = storageFrom.getFileById(id);
-
-        Exception e = new Exception("File " + id + " was not transmitted from storage " + storageFrom.getId() + " to storage " + storageTo.getId());
+        File transmittedFile = storageFrom.getFileById(id);
 
         if (transmittedFile == null)
-            throw e;
+            throw new Exception("File " + id + " was not transmitted from storage " + storageFrom.getId() + " to storage " + storageTo.getId());
 
-        try {
-            put(storageTo, transmittedFile);
-        } catch (Exception ex) {
-            throw e;
-        }
-
+        put(storageTo, transmittedFile);
         storageFrom.deleteFile(transmittedFile);
     }
 
@@ -56,4 +47,3 @@ public class Controller {
         storageFrom.transferAllFiles(storageTo);
     }
 }
-
