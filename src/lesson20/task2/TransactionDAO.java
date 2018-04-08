@@ -35,6 +35,15 @@ public class TransactionDAO {
                 throw new BadRequestException("Transaction " + transaction.getId() + " already saved");
         }
 
+        String city = null;
+        for (String c : utils.getCities()) {
+            if (c.equals(transaction.getCity()))
+                city = c;
+        }
+
+        if (city == null)
+            throw new BadRequestException("Transaction " + transaction.getId() + " is carried out in an unauthorized city. Can't be saved");
+
         checkTransactionForLimits(transaction);
 
         for (Transaction tr : transactions) {
@@ -62,15 +71,6 @@ public class TransactionDAO {
 
         if (countOfTransactionPerDay >= utils.getLimitTransactionsPerDayCount())
             throw new LimitExceeded("Transaction limit per day count exceed " + transaction.getId() + ". Can't be saved");
-
-        String city = null;
-        for (String c : utils.getCities()) {
-            if (c.equals(transaction.getCity()))
-                city = c;
-        }
-
-        if (city == null)
-            throw new LimitExceeded("Transaction " + transaction.getId() + " is carried out in an unauthorized city. Can't be saved");
     }
 
     public Transaction[] transactionList() {
