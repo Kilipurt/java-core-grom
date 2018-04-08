@@ -49,7 +49,7 @@ public class UserRepository {
         throw new UserNotFoundException("User with id: " + id + " not found");
     }
 
-    public void delete(long id) throws Exception{
+    public void delete(long id) throws Exception {
 
         findById(id);
 

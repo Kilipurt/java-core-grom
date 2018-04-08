@@ -12,8 +12,7 @@ public class TransactionDAO {
     private Utils utils = new Utils();
 
     public Transaction save(Transaction transaction) throws Exception {
-        checkTransactionForLimits(transaction);
-        transactionValidate(transaction);
+        transactionVerification(transaction);
 
         int index = 0;
         for (Transaction tr : transactions) {
@@ -27,22 +26,16 @@ public class TransactionDAO {
         return transactions[index];
     }
 
-    private void checkTransactionForLimits(Transaction transaction) throws Exception {
-        if (transaction.getAmount() > utils.getLimitSimpleTransactionAmount() || transaction.getAmount() <= 0)
-            throw new LimitExceeded("Transaction limit exceed " + transaction.getId() + ". Can't be saved");
+    private void transactionVerification(Transaction transaction) throws Exception {
+        if (transaction == null)
+            throw new BadRequestException("Can't be saved empty transaction");
 
-        int sum = 0;
-        int count = 0;
-        for (Transaction tr : getTransactionsPerDay(transaction.getDateCreated())) {
-            sum += tr.getAmount();
-            count++;
+        for (Transaction tr : transactions) {
+            if (tr != null && transaction.equals(tr))
+                throw new BadRequestException("Transaction " + transaction.getId() + " already saved");
         }
 
-        if (sum + transaction.getAmount() > utils.getLimitTransactionsPerDayAmount())
-            throw new LimitExceeded("Transaction limit per day amount exceed " + transaction.getId() + ". Can't be saved");
-
-        if (count >= utils.getLimitTransactionsPerDayCount())
-            throw new LimitExceeded("Transaction limit per day count exceed " + transaction.getId() + ". Can't be saved");
+        checkTransactionForLimits(transaction);
 
         for (Transaction tr : transactions) {
             if (tr == null)
@@ -52,9 +45,23 @@ public class TransactionDAO {
         throw new InternalServerException("Don't enough space for saving transaction " + transaction.getId());
     }
 
-    private void transactionValidate(Transaction transaction) throws BadRequestException{
-        if (transaction == null)
-            throw new BadRequestException("Can't be saved empty transaction");
+    private void checkTransactionForLimits(Transaction transaction) throws LimitExceeded {
+        if (transaction.getAmount() > utils.getLimitSimpleTransactionAmount() || transaction.getAmount() <= 0)
+            throw new LimitExceeded("Transaction's amount limit exceed " + transaction.getId() + ". Can't be saved");
+
+        int sumOfTransactionsPerDay = 0;
+        int countOfTransactionPerDay = 0;
+
+        for (Transaction tr : getTransactionsPerDay(transaction.getDateCreated())) {
+            sumOfTransactionsPerDay += tr.getAmount();
+            countOfTransactionPerDay++;
+        }
+
+        if (sumOfTransactionsPerDay + transaction.getAmount() > utils.getLimitTransactionsPerDayAmount())
+            throw new LimitExceeded("Transaction limit per day amount exceed " + transaction.getId() + ". Can't be saved");
+
+        if (countOfTransactionPerDay >= utils.getLimitTransactionsPerDayCount())
+            throw new LimitExceeded("Transaction limit per day count exceed " + transaction.getId() + ". Can't be saved");
 
         String city = null;
         for (String c : utils.getCities()) {
@@ -63,15 +70,10 @@ public class TransactionDAO {
         }
 
         if (city == null)
-            throw new BadRequestException("Transaction " + transaction.getId() + " is carried out in an unauthorized city. Can't be saved");
-
-        for(Transaction tr : transactions){
-            if(tr != null && transaction.equals(tr))
-                throw new BadRequestException("Transaction " + transaction.getId() + " already saved");
-        }
+            throw new LimitExceeded("Transaction " + transaction.getId() + " is carried out in an unauthorized city. Can't be saved");
     }
 
-    Transaction[] transactionList() {
+    public Transaction[] transactionList() {
         int count = 0;
         for (Transaction tr : transactions) {
             if (tr != null)
@@ -91,7 +93,7 @@ public class TransactionDAO {
         return result;
     }
 
-    Transaction[] transactionList(String city) throws BadRequestException {
+    public Transaction[] transactionList(String city) throws BadRequestException {
         if (city == null)
             throw new BadRequestException("Wrong enter city");
 
@@ -114,7 +116,7 @@ public class TransactionDAO {
         return result;
     }
 
-    Transaction[] transactionList(int amount) throws BadRequestException {
+    public Transaction[] transactionList(int amount) throws BadRequestException {
         if (amount == 0)
             throw new BadRequestException("Wrong enter amount");
 

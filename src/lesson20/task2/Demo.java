@@ -12,25 +12,25 @@ public class Demo {
 
         try {
             controller.save(t1);
-        }catch(Exception e){
+        } catch (Exception e) {
             System.err.println(e.getMessage());
         }
 
         try {
             System.out.println(Arrays.toString(controller.transactionList()));
-        }catch(Exception e){
+        } catch (Exception e) {
             System.err.println(e.getMessage());
         }
 
         try {
             System.out.println(Arrays.toString(controller.transactionList(50)));
-        }catch(Exception e){
+        } catch (Exception e) {
             System.err.println(e.getMessage());
         }
 
         try {
             System.out.println(Arrays.toString(controller.transactionList("Kiev")));
-        }catch(Exception e){
+        } catch (Exception e) {
             System.err.println(e.getMessage());
         }
     }
