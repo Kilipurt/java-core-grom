@@ -1,6 +1,6 @@
 package lesson22.homework;
 
-import lesson20.task2.exception.BadRequestException;
+import lesson22.homework.exception.BadRequestException;
 
 public class Controller {
 
