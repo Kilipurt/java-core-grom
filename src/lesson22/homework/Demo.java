@@ -8,28 +8,27 @@ public class Demo {
     public static void main(String[] args) {
 
         Transaction t1 = new Transaction(1, "Kiev", 35, "withdraw", TransactionType.OUTCOME, new Date());
-        Controller controller = new Controller();
 
         try {
-            controller.save(t1);
+            Controller.save(t1);
         } catch (Exception e) {
             System.err.println(e.getMessage());
         }
 
         try {
-            System.out.println(Arrays.toString(controller.transactionList()));
+            System.out.println(Arrays.toString(Controller.transactionList()));
         } catch (Exception e) {
             System.err.println(e.getMessage());
         }
 
         try {
-            System.out.println(Arrays.toString(controller.transactionList(50)));
+            System.out.println(Arrays.toString(Controller.transactionList(50)));
         } catch (Exception e) {
             System.err.println(e.getMessage());
         }
 
         try {
-            System.out.println(Arrays.toString(controller.transactionList("Kiev")));
+            System.out.println(Arrays.toString(Controller.transactionList("Kiev")));
         } catch (Exception e) {
             System.err.println(e.getMessage());
         }
