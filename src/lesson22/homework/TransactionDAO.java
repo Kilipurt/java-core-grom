@@ -8,9 +8,9 @@ import java.util.Calendar;
 import java.util.Date;
 
 public class TransactionDAO {
-    private static Transaction[] transactions = new Transaction[10];
+    private Transaction[] transactions = new Transaction[10];
 
-    public static Transaction save(Transaction transaction) throws Exception {
+    public Transaction save(Transaction transaction) throws Exception {
         transactionValidation(transaction);
 
         int index = 0;
@@ -25,7 +25,7 @@ public class TransactionDAO {
         return transactions[index];
     }
 
-    private static void transactionValidation(Transaction transaction) throws Exception {
+    private void transactionValidation(Transaction transaction) throws Exception {
         if (transaction == null)
             throw new BadRequestException("Can't be saved empty transaction");
 
@@ -53,7 +53,7 @@ public class TransactionDAO {
         throw new InternalServerException("Don't enough space for saving transaction " + transaction.getId());
     }
 
-    private static void checkTransactionForLimits(Transaction transaction) throws LimitExceeded {
+    private void checkTransactionForLimits(Transaction transaction) throws LimitExceeded {
         if (transaction.getAmount() > Utils.getLimitSimpleTransactionAmount() || transaction.getAmount() <= 0)
             throw new LimitExceeded("Transaction's amount limit exceed " + transaction.getId() + ". Can't be saved");
 
@@ -72,7 +72,7 @@ public class TransactionDAO {
             throw new LimitExceeded("Transaction limit per day count exceed " + transaction.getId() + ". Can't be saved");
     }
 
-    public static Transaction[] transactionList() {
+    public Transaction[] transactionList() {
         int count = 0;
         for (Transaction tr : transactions) {
             if (tr != null)
@@ -92,7 +92,7 @@ public class TransactionDAO {
         return result;
     }
 
-    public static Transaction[] transactionList(String city) throws BadRequestException {
+    public Transaction[] transactionList(String city) throws BadRequestException {
         if (city == null)
             throw new BadRequestException("Wrong enter city");
 
@@ -115,7 +115,7 @@ public class TransactionDAO {
         return result;
     }
 
-    public static Transaction[] transactionList(int amount) throws BadRequestException {
+    public Transaction[] transactionList(int amount) throws BadRequestException {
         if (amount == 0)
             throw new BadRequestException("Wrong enter amount");
 
@@ -138,7 +138,7 @@ public class TransactionDAO {
         return result;
     }
 
-    private static Transaction[] getTransactionsPerDay(Date dateOfCurTransaction) {
+    private Transaction[] getTransactionsPerDay(Date dateOfCurTransaction) {
         Calendar calendar = Calendar.getInstance();
         calendar.setTime(dateOfCurTransaction);
 

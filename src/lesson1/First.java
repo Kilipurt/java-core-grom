@@ -8,10 +8,7 @@ public class First {
 }
 
 
-    //boolean isEnoughSpaceForFile = (storageTo.filesContainedSize() + transmittedFile.getSize()) <= storageTo.getStorageSize();
-        /*if (storageTo.isFull() || storageTo.isFileContained(transmittedFile) || !storageTo.isTrueFormat(transmittedFile.getFormat()) || !isEnoughSpaceForFile) {
-            throw e;
-        } else {
-            storageTo.addFile(transmittedFile);
-            storageFrom.deleteFile(transmittedFile);
-        }*/
+//    привіт
+//            урок 22
+//            https://www.gromcode.com/solution24559
+//            по завданню треба всюди, де можливо, застосувати static. Наскільки розумію, цей електронний кошелек може використовувати тільки один юзер, а щоб їх було багато треба методи і поля класів TransactionDAO і Controller не робити static?
