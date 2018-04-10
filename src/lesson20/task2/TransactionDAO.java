@@ -12,7 +12,7 @@ public class TransactionDAO {
     private Utils utils = new Utils();
 
     public Transaction save(Transaction transaction) throws Exception {
-        transactionVerification(transaction);
+        transactionValidation(transaction);
 
         int index = 0;
         for (Transaction tr : transactions) {
@@ -26,7 +26,7 @@ public class TransactionDAO {
         return transactions[index];
     }
 
-    private void transactionVerification(Transaction transaction) throws Exception {
+    private void transactionValidation(Transaction transaction) throws Exception {
         if (transaction == null)
             throw new BadRequestException("Can't be saved empty transaction");
 

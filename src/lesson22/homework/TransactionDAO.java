@@ -11,7 +11,7 @@ public class TransactionDAO {
     private static Transaction[] transactions = new Transaction[10];
 
     public static Transaction save(Transaction transaction) throws Exception {
-        transactionVerification(transaction);
+        transactionValidation(transaction);
 
         int index = 0;
         for (Transaction tr : transactions) {
@@ -25,7 +25,7 @@ public class TransactionDAO {
         return transactions[index];
     }
 
-    private static void transactionVerification(Transaction transaction) throws Exception {
+    private static void transactionValidation(Transaction transaction) throws Exception {
         if (transaction == null)
             throw new BadRequestException("Can't be saved empty transaction");
 
