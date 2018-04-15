@@ -1,4 +1,4 @@
-package tasksforall.homework;
+package lesson25.homework;
 
 public class GeneralDAO<T> {
 
