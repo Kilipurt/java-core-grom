@@ -23,9 +23,12 @@ public class UserRepository {
 
     public User update(User user) throws Exception {
         if (user != null) {
+            if (users.contains(user))
+                throw new Exception("User " + user.getId() + " already saved");
+
             int index = 0;
             for (User us : users) {
-                if (us != null && user.getId() == us.getId() && !us.equals(user)) {
+                if (us != null && user.getId() == us.getId()) {
                     users.set(index, user);
                     return users.get(index);
                 }
