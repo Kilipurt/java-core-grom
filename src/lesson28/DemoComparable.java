@@ -10,7 +10,6 @@ public class DemoComparable {
         Capability capability2 = new Capability(1005, "test", "rrrr", true, new Date());
         Capability capability3 = new Capability(900, "test", "rrrr", true, new Date());
 
-        //if we have many elements?
         Set<Capability> set = new TreeSet<>();
         set.add(capability1);
         set.add(capability2);
