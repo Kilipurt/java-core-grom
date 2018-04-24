@@ -1,6 +1,6 @@
 package lesson29;
 
-public class File {
+public class File implements Comparable<File> {
     private String fileName;
     private long sizeInBytes;
 
@@ -13,6 +13,10 @@ public class File {
         return fileName;
     }
 
+    public long getSizeInBytes() {
+        return sizeInBytes;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -21,6 +25,18 @@ public class File {
         File file = (File) o;
 
         return fileName != null ? fileName.equals(file.fileName) : file.fileName == null;
+    }
+
+    @Override
+    public int compareTo(File file) {
+        int res = 0;
+
+        if (file.getSizeInBytes() > this.sizeInBytes)
+            res = 1;
+        else if (file.getSizeInBytes() < this.sizeInBytes)
+            return -1;
+
+        return res;
     }
 
     @Override
