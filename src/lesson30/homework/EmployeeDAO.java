@@ -3,6 +3,7 @@ package lesson30.homework;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
+import java.util.HashSet;
 
 public class EmployeeDAO {
 
@@ -71,33 +72,30 @@ public class EmployeeDAO {
         ArrayList<Employee> listOfEmployees = new ArrayList<>();
 
         for (Department department : DepartmentDAO.getDepartments()) {
-            if (department != null && department.getType().equals(departmentType))
-                employeesWithoutProjectInStructure(department.getEmployees(), listOfEmployees);
+            if (department != null && department.getType().equals(departmentType)) {
+                listOfEmployees.addAll(notInvolvedEmployees(department.getEmployees()));
+            }
         }
 
         return listOfEmployees;
     }
 
     public static ArrayList<Employee> employeesWithoutProject() {
-        ArrayList<Employee> listOfEmployees = new ArrayList<>();
-
-        employeesWithoutProjectInStructure(employees, listOfEmployees);
-
-        return listOfEmployees;
+        return notInvolvedEmployees(employees);
     }
 
-    public static ArrayList<Employee> employeesByTeamLead(Employee lead) throws Exception {
+    public static HashSet<Employee> employeesByTeamLead(Employee lead) throws Exception {
         if (lead == null)
             throw new Exception("Input data is empty");
 
         if (lead.getPosition() != Position.TEAM_LEAD)
             throw new Exception("This employee is not team leader");
 
-        ArrayList<Employee> listOfEmployees = new ArrayList<>();
+        HashSet<Employee> listOfEmployees = new HashSet<>();
 
         for (Project project : lead.getProjects()) {
             if (project != null)
-                employeesByTeamLeadInProject(project, listOfEmployees);
+                listOfEmployees.addAll(subordinateEmployees(project));
         }
 
         listOfEmployees.remove(lead);
@@ -105,15 +103,15 @@ public class EmployeeDAO {
         return listOfEmployees;
     }
 
-    public static ArrayList<Employee> teamLeadsByEmployee(Employee employee) throws Exception {
+    public static HashSet<Employee> teamLeadsByEmployee(Employee employee) throws Exception {
         if (employee == null)
             throw new Exception("Input data is empty");
 
-        ArrayList<Employee> listOfEmployee = new ArrayList<>();
+        HashSet<Employee> listOfEmployee = new HashSet<>();
 
         for (Project project : employee.getProjects()) {
-            if (project != null)
-                teamLeadByEmployeeInProject(project, listOfEmployee);
+            if (project != null && identifyTeamLead(project) != null)
+                listOfEmployee.add(identifyTeamLead(project));
         }
 
         return listOfEmployee;
@@ -129,7 +127,7 @@ public class EmployeeDAO {
         ArrayList<Employee> listOfEmployee = new ArrayList<>();
 
         for (Employee emp : employees) {
-            if (emp != null && isEmployeeParticipateInProjects(emp, employee.getProjects()))
+            if (emp != null && emp.getProjects().containsAll(employee.getProjects()))
                 listOfEmployee.add(emp);
         }
 
@@ -138,54 +136,59 @@ public class EmployeeDAO {
         return listOfEmployee;
     }
 
-    public static ArrayList<Employee> employeesByCustomerProjects(Customer customer) throws Exception {
+    public static HashSet<Employee> employeesByCustomerProjects(Customer customer) throws Exception {
         if (customer == null)
             throw new Exception("Input data is empty");
 
-        ArrayList<Employee> listOfEmployee = new ArrayList<>();
+        HashSet<Employee> listOfEmployee = new HashSet<>();
 
         for (Project project : ProjectDAO.getProjects()) {
             if (project != null && project.getCustomer().equals(customer))
-                employeesByProject(project, listOfEmployee);
+                listOfEmployee.addAll(employeesByProject(project));
         }
 
         return listOfEmployee;
     }
 
-    private static void employeesByProject(Project project, ArrayList<Employee> resultList) {
+    private static ArrayList<Employee> employeesByProject(Project project) {
+        ArrayList<Employee> result = new ArrayList<>();
+
         for (Employee employee : employees) {
-            if (employee != null && employee.getProjects().contains(project) && !resultList.contains(employee))
-                resultList.add(employee);
-        }
-    }
-
-    private static boolean isEmployeeParticipateInProjects(Employee employee, Collection<Project> projects) {
-        for (Project project : projects) {
-            if (!employee.getProjects().contains(project))
-                return false;
+            if (employee != null && employee.getProjects().contains(project))
+                result.add(employee);
         }
 
-        return true;
+        return result;
     }
 
-    private static void employeesWithoutProjectInStructure(Collection<Employee> employees, ArrayList<Employee> resultList) {
+    private static ArrayList<Employee> notInvolvedEmployees(Collection<Employee> employees) {
+        ArrayList<Employee> result = new ArrayList<>();
+
         for (Employee employee : employees) {
             if (employee != null && employee.getProjects().isEmpty())
-                resultList.add(employee);
+                result.add(employee);
         }
+
+        return result;
     }
 
-    private static void employeesByTeamLeadInProject(Project project, ArrayList<Employee> resultList) {
+    private static ArrayList<Employee> subordinateEmployees(Project project) {
+        ArrayList<Employee> result = new ArrayList<>();
+
         for (Employee employee : employees) {
-            if (employee != null && employee.getProjects().contains(project) && !resultList.contains(employee))
-                resultList.add(employee);
+            if (employee != null && employee.getProjects().contains(project))
+                result.add(employee);
         }
+
+        return result;
     }
 
-    private static void teamLeadByEmployeeInProject(Project project, ArrayList<Employee> resultList) {
+    private static Employee identifyTeamLead(Project project) {
         for (Employee emp : employees) {
-            if (emp != null && emp.getProjects().contains(project) && emp.getPosition().equals(Position.TEAM_LEAD) && !resultList.contains(emp))
-                resultList.add(emp);
+            if (emp != null && emp.getProjects().contains(project) && emp.getPosition().equals(Position.TEAM_LEAD))
+                return emp;
         }
+
+        return null;
     }
 }

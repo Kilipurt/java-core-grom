@@ -2,6 +2,7 @@ package lesson30.homework;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
 
 public class Controller {
 
@@ -17,11 +18,11 @@ public class Controller {
         return EmployeeDAO.employeesWithoutProject();
     }
 
-    public static ArrayList<Employee> employeesByTeamLead(Employee lead) throws Exception {
+    public static HashSet<Employee> employeesByTeamLead(Employee lead) throws Exception {
         return EmployeeDAO.employeesByTeamLead(lead);
     }
 
-    public static ArrayList<Employee> teamLeadsByEmployee(Employee employee) throws Exception {
+    public static HashSet<Employee> teamLeadsByEmployee(Employee employee) throws Exception {
         return EmployeeDAO.teamLeadsByEmployee(employee);
     }
 
@@ -29,7 +30,7 @@ public class Controller {
         return EmployeeDAO.employeesByProjectEmployee(employee);
     }
 
-    public static ArrayList<Employee> employeesByCustomerProjects(Customer customer) throws Exception {
+    public static HashSet<Employee> employeesByCustomerProjects(Customer customer) throws Exception {
         return EmployeeDAO.employeesByCustomerProjects(customer);
     }
 
