@@ -6,17 +6,14 @@ public class Solution {
     public static void transferFileContent(String fileFromPath, String fileToPath) throws Exception {
         validate(fileFromPath, fileToPath);
 
-        writeToFile(fileToPath, readFromFile(fileFromPath));
-
-        clearFile(fileFromPath);
-    }
-
-    private static void clearFile(String path) {
-        try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(path))) {
-            bufferedWriter.append("");
-        } catch (IOException e) {
-            System.err.println("Can't write to file");
+        if (!isFileEmpty(fileToPath)) {
+            writeToFile(fileToPath, readFromFile(fileFromPath).insert(0, "\r\n"), true);
+        }else {
+            writeToFile(fileToPath, readFromFile(fileFromPath), true);
         }
+
+        StringBuffer string = new StringBuffer("");
+        writeToFile(fileFromPath, string, false);
     }
 
     private static boolean isFileEmpty(String path) {
@@ -52,11 +49,8 @@ public class Solution {
         return res;
     }
 
-    private static void writeToFile(String path, StringBuffer contentToWrite) {
-        try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(path, true))) {
-            if (!isFileEmpty(path))
-                bufferedWriter.append("\r\n");
-
+    private static void writeToFile(String path, StringBuffer contentToWrite, boolean append) {
+        try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(path, append))) {
             bufferedWriter.append(contentToWrite);
         } catch (IOException e) {
             System.err.println("Can't write to file");

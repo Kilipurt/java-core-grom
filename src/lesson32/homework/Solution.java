@@ -17,8 +17,7 @@ public class Solution {
 
             if (!validateNumbers(numbers)) {
                 if (n == 0) {
-                    System.out.println("Your numbers are wrong. Number of attempts exceeded");
-                    throw new Exception("Wrong enter number");
+                    throw new Exception("Your numbers are wrong. Number of attempts exceeded");
                 } else {
                     System.out.println("Your numbers are wrong. You have " + n + " attempts to try again");
                 }
