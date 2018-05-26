@@ -1,20 +1,12 @@
 package lesson36.services;
 
 import lesson36.exceptions.BadRequestException;
+import lesson36.exceptions.ObjectNotFoundException;
 import lesson36.models.User;
 import lesson36.repositories.UserRepository;
 
 public class UserService {
     private UserRepository userRepository = new UserRepository();
-    private User loginUser;
-
-    public User getLoginUser() {
-        return loginUser;
-    }
-
-    public void setLoginUser(User loginUser) {
-        this.loginUser = loginUser;
-    }
 
     public void registerUser(User user) throws Exception {
         validateUser(user);
@@ -22,25 +14,14 @@ public class UserService {
         userRepository.create(user);
     }
 
-    public void login(String userName, String password) throws Exception {
-        if (userName == null || userName.isEmpty())
-            throw new BadRequestException("Wrong  enter user name");
-
-        if (password == null || password.isEmpty())
-            throw new BadRequestException("Wrong enter password");
-
+    public User login(String userName, String password) throws Exception {
         for (User user : userRepository.getAll()) {
             if (user.getUserName().equals(userName) && user.getPassword().equals(password)) {
-                loginUser = user;
+                return user;
             }
         }
-    }
 
-    public void logout() throws Exception {
-        if (loginUser == null)
-            throw new BadRequestException("User are not authorized");
-
-        loginUser = null;
+        throw new ObjectNotFoundException("User " + userName + " was not found");
     }
 
     public void removeAccount(User user) throws Exception {
