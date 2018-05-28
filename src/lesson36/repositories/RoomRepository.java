@@ -14,7 +14,7 @@ public class RoomRepository extends GenericRepository<Room> {
     private HotelRepository hotelRepository = new HotelRepository();
 
     public RoomRepository() {
-        super.setPath("D:\\JavaProjects\\RoomDb.txt");
+        setPath("D:\\JavaProjects\\RoomDb.txt");
     }
 
     @Override
@@ -80,11 +80,6 @@ public class RoomRepository extends GenericRepository<Room> {
         Hotel hotel = hotelRepository.findById(Long.parseLong(fields[6]));
 
         return new Room(id, numberOfGuests, price, breakfastIncluded, petsAllowed, dateAvailableFrom, hotel);
-    }
-
-    @Override
-    public ArrayList<Room> mapAll(StringBuffer all) throws MappingException {
-        return super.mapAll(all);
     }
 
     @Override

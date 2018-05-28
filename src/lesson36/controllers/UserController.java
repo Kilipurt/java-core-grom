@@ -6,14 +6,10 @@ import lesson36.services.UserService;
 
 public class UserController {
     private UserService userService = new UserService();
-    private User authorizedUser;
+    private static User authorizedUser;
 
     public User getAuthorizedUser() {
         return authorizedUser;
-    }
-
-    public void setAuthorizedUser(User authorizedUser) {
-        this.authorizedUser = authorizedUser;
     }
 
     public void logout() throws Exception {

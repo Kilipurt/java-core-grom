@@ -31,19 +31,19 @@ public class Filter {
         return hotelName;
     }
 
-    public boolean isBreakfastIncluded() {
+    public Boolean isBreakfastIncluded() {
         return breakfastIncluded;
     }
 
-    public boolean isPetsAllowed() {
+    public Boolean isPetsAllowed() {
         return petsAllowed;
     }
 
-    public int getNumberOfGuests() {
+    public Integer getNumberOfGuests() {
         return numberOfGuests;
     }
 
-    public double getMaxPrice() {
+    public Double getMaxPrice() {
         return maxPrice;
     }
 }

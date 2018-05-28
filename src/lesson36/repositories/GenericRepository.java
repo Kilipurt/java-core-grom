@@ -127,7 +127,7 @@ public abstract class GenericRepository<T extends Entity> {
 
     public abstract T map(String obj, int count) throws MappingException;
 
-    public ArrayList<T> mapAll(StringBuffer all) throws MappingException {
+    private ArrayList<T> mapAll(StringBuffer all) throws MappingException {
         ArrayList<T> allObjects = new ArrayList<>();
 
         if (all.length() == 0)

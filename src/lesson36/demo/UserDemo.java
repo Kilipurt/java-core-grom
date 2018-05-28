@@ -8,10 +8,11 @@ public class UserDemo {
     public static void main(String[] args) {
         UserController userController = new UserController();
 
-        User user = new User("Kilipurt", "123456", "Ukraine", UserType.USER);
+        User user = new User("Kilipurt", "123456", "Ukraine", UserType.ADMIN);
+        User user1 = new User("Honor", "123456", "Ukraine", UserType.USER);
 
         try {
-            userController.registerUser(user);
+            userController.registerUser(user1);
         } catch (Exception e) {
             System.err.println(e.getMessage());
         }

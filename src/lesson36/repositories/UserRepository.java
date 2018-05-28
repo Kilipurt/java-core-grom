@@ -9,7 +9,7 @@ import java.util.ArrayList;
 public class UserRepository extends GenericRepository<User> {
 
     public UserRepository() {
-        super.setPath("D:\\JavaProjects\\UserDb.txt");
+        setPath("D:\\JavaProjects\\UserDb.txt");
     }
 
     @Override
@@ -55,11 +55,6 @@ public class UserRepository extends GenericRepository<User> {
         }
 
         return new User(Long.parseLong(fields[0]), fields[1], fields[2], fields[3], UserType.valueOf(fields[4]));
-    }
-
-    @Override
-    public ArrayList<User> mapAll(StringBuffer all) throws MappingException {
-        return super.mapAll(all);
     }
 
     @Override

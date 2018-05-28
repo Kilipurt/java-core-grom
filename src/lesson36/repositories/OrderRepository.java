@@ -17,7 +17,7 @@ public class OrderRepository extends GenericRepository<Order> {
     private RoomRepository roomRepository = new RoomRepository();
 
     public OrderRepository() {
-        super.setPath("D:\\JavaProjects\\OrderDb.txt");
+        setPath("D:\\JavaProjects\\OrderDb.txt");
     }
 
     @Override
@@ -88,11 +88,6 @@ public class OrderRepository extends GenericRepository<Order> {
         double moneyPaid = Double.parseDouble(fields[5]);
 
         return new Order(id, user, room, dateFrom, dateTo, moneyPaid);
-    }
-
-    @Override
-    public ArrayList<Order> mapAll(StringBuffer all) throws MappingException {
-        return super.mapAll(all);
     }
 
     @Override

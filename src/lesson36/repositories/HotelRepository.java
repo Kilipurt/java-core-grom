@@ -8,7 +8,7 @@ import java.util.ArrayList;
 public class HotelRepository extends GenericRepository<Hotel> {
 
     public HotelRepository() {
-        super.setPath("D:\\JavaProjects\\HotelDb.txt");
+        setPath("D:\\JavaProjects\\HotelDb.txt");
     }
 
     @Override
@@ -59,11 +59,6 @@ public class HotelRepository extends GenericRepository<Hotel> {
         }
 
         return new Hotel(Long.parseLong(fields[0]), fields[1], fields[2], fields[3], fields[4]);
-    }
-
-    @Override
-    public ArrayList<Hotel> mapAll(StringBuffer all) throws MappingException {
-        return super.mapAll(all);
     }
 
     @Override
