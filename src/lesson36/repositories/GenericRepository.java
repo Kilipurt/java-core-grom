@@ -91,9 +91,9 @@ public abstract class GenericRepository<T extends Entity> {
         return null;
     }
 
-    public T find(T t)throws MappingException{
-        for(T obj : getAll()){
-            if(obj != null && obj.equals(t)){
+    public T find(T t) throws MappingException {
+        for (T obj : getAll()) {
+            if (obj != null && obj.equals(t)) {
                 return obj;
             }
         }
@@ -102,7 +102,7 @@ public abstract class GenericRepository<T extends Entity> {
     }
 
     public void remove(T t) throws Exception {
-        if(!isObjectExist(t))
+        if (!isObjectExist(t))
             throw new ObjectNotFoundException("Object was not found");
 
         ArrayList<T> allObjects = getAll();

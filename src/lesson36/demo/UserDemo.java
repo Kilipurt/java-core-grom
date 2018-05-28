@@ -10,10 +10,28 @@ public class UserDemo {
 
         User user = new User("Kilipurt", "123456", "Ukraine", UserType.USER);
 
-        userController.registerUser(user);
-        userController.login("Kilipurt", "123456");
-        userController.logout();
+        try {
+            userController.registerUser(user);
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+        }
 
-        userController.removeAccount(user);
+        try {
+            userController.login("Kilipurt", "123456");
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+        }
+
+        try {
+            userController.logout();
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+        }
+
+        try {
+            userController.removeAccount(user);
+        } catch (Exception e) {
+            e.getMessage();
+        }
     }
 }

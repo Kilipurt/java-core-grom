@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 public class HotelRepository extends GenericRepository<Hotel> {
 
-    public HotelRepository(){
+    public HotelRepository() {
         super.setPath("D:\\JavaProjects\\HotelDb.txt");
     }
 
@@ -69,7 +69,7 @@ public class HotelRepository extends GenericRepository<Hotel> {
     @Override
     public String reverseMap(Hotel obj) {
         return obj.getId() + ", "
-                + obj.getName()+ ", "
+                + obj.getName() + ", "
                 + obj.getCountry() + ", "
                 + obj.getCity() + ", "
                 + obj.getStreet();
