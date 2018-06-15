@@ -1,6 +1,5 @@
 package lesson36.repositories;
 
-import lesson36.exceptions.MappingException;
 import lesson36.models.Hotel;
 import lesson36.models.Room;
 
@@ -28,22 +27,22 @@ public class RoomRepository extends GenericRepository<Room> {
     }
 
     @Override
-    public boolean isObjectExist(Room room) throws MappingException {
+    public boolean isObjectExist(Room room) {
         return super.isObjectExist(room);
     }
 
     @Override
-    public ArrayList<Room> getAll() throws MappingException {
+    public ArrayList<Room> getAll() {
         return super.getAll();
     }
 
     @Override
-    public Room findById(long id) throws MappingException {
+    public Room findById(long id) {
         return super.findById(id);
     }
 
     @Override
-    public Room find(Room room) throws MappingException {
+    public Room find(Room room) {
         return super.find(room);
     }
 
@@ -53,16 +52,8 @@ public class RoomRepository extends GenericRepository<Room> {
     }
 
     @Override
-    public Room map(String obj, int count) throws MappingException {
+    public Room map(String obj) {
         String[] fields = obj.split("([,][ ])");
-
-        if (fields.length != 7)
-            throw new MappingException("Room's information is not full in line " + count);
-
-        for (String field : fields) {
-            if (field == null || field.isEmpty())
-                throw new MappingException("Room's information has empty property in line " + count);
-        }
 
         long id = Long.parseLong(fields[0]);
         int numberOfGuests = Integer.parseInt(fields[1]);
@@ -70,11 +61,11 @@ public class RoomRepository extends GenericRepository<Room> {
         boolean breakfastIncluded = Boolean.parseBoolean(fields[3]);
         boolean petsAllowed = Boolean.parseBoolean(fields[4]);
 
-        Date dateAvailableFrom;
+        Date dateAvailableFrom = null;
         try {
             dateAvailableFrom = dateFormat.parse(fields[5]);
         } catch (Exception e) {
-            throw new MappingException("Room " + id + " has injured data in field date in line " + count);
+            System.err.println("Date format exception" + id);
         }
 
         Hotel hotel = hotelRepository.findById(Long.parseLong(fields[6]));

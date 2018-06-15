@@ -55,18 +55,11 @@ public class User extends Entity {
 
         User user = (User) o;
 
-        if (userName != null ? !userName.equals(user.userName) : user.userName != null) return false;
-        if (password != null ? !password.equals(user.password) : user.password != null) return false;
-        if (country != null ? !country.equals(user.country) : user.country != null) return false;
-        return userType == user.userType;
+        return userName != null ? userName.equals(user.userName) : user.userName == null;
     }
 
     @Override
     public int hashCode() {
-        int result = userName != null ? userName.hashCode() : 0;
-        result = 31 * result + (password != null ? password.hashCode() : 0);
-        result = 31 * result + (country != null ? country.hashCode() : 0);
-        result = 31 * result + (userType != null ? userType.hashCode() : 0);
-        return result;
+        return userName != null ? userName.hashCode() : 0;
     }
 }

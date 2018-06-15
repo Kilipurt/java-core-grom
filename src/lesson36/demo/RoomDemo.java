@@ -5,8 +5,6 @@ import lesson36.controllers.RoomController;
 import lesson36.controllers.UserController;
 import lesson36.models.Filter;
 import lesson36.models.Room;
-
-import java.util.Collections;
 import java.util.Date;
 
 public class RoomDemo {
@@ -27,11 +25,11 @@ public class RoomDemo {
 //            System.err.println(e.getMessage());
 //        }
 
-//        try {
-//            roomController.addRoom(new Room(2, 100, true, false, new Date(), hotelController.findHotelByName("Ukraine55")));
-//        } catch (Exception e) {
-//            System.err.println(e.getMessage());
-//        }
+        try {
+            roomController.addRoom(new Room(2, 100, true, false, new Date(), hotelController.findHotelByName("Ukraine55")));
+        } catch (Exception e) {
+            System.err.println(e.getMessage());
+        }
 
 //        try {
 //            roomController.deleteRoom(47107114);

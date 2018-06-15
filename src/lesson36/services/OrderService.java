@@ -20,10 +20,8 @@ public class OrderService {
         if (room == null)
             throw new ObjectNotFoundException("Room with id " + roomId + " was not found");
 
-        if (dateFrom.compareTo(room.getDateAvailableFrom()) < 0)
-            throw new BadRequestException("Room with id " + roomId + " will be available from " + room.getDateAvailableFrom());
-
         Order order = new Order(user, room, dateFrom, dateTo, room.getPrice());
+        validate(order);
         orderRepository.create(order);
     }
 
@@ -36,5 +34,27 @@ public class OrderService {
         }
 
         throw new ObjectNotFoundException("User with id " + userId + " does not book room with id " + roomId);
+    }
+
+    private void validate(Order order) throws BadRequestException {
+        if (order.getUser() == null)
+            throw new BadRequestException("Wrong enter user");
+
+        if (order.getRoom() == null)
+            throw new BadRequestException("Wrong enter room");
+
+        if (order.getDateFrom() == null)
+            throw new BadRequestException("Wrong enter start date of order");
+
+        if (order.getDateFrom().compareTo(order.getRoom().getDateAvailableFrom()) < 0) {
+            throw new BadRequestException("Room with id " + order.getRoom().getId()
+                    + " will be available from " + order.getRoom().getDateAvailableFrom());
+        }
+
+        if (order.getDateTo() == null)
+            throw new BadRequestException("Wrong enter end date of order");
+
+        if (order.getMoneyPaid() <= 0)
+            throw new BadRequestException("Wrong enter money paid of order");
     }
 }

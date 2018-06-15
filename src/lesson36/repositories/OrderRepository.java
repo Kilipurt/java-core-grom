@@ -1,6 +1,5 @@
 package lesson36.repositories;
 
-import lesson36.exceptions.MappingException;
 import lesson36.models.Order;
 import lesson36.models.Room;
 import lesson36.models.User;
@@ -31,22 +30,22 @@ public class OrderRepository extends GenericRepository<Order> {
     }
 
     @Override
-    public boolean isObjectExist(Order order) throws MappingException {
+    public boolean isObjectExist(Order order) {
         return super.isObjectExist(order);
     }
 
     @Override
-    public ArrayList<Order> getAll() throws MappingException {
+    public ArrayList<Order> getAll() {
         return super.getAll();
     }
 
     @Override
-    public Order findById(long id) throws MappingException {
+    public Order findById(long id) {
         return super.findById(id);
     }
 
     @Override
-    public Order find(Order order) throws MappingException {
+    public Order find(Order order) {
         return super.find(order);
     }
 
@@ -56,33 +55,25 @@ public class OrderRepository extends GenericRepository<Order> {
     }
 
     @Override
-    public Order map(String obj, int count) throws MappingException {
+    public Order map(String obj) {
         String[] fields = obj.split("([,][ ])");
-
-        if (fields.length != 6)
-            throw new MappingException("Order's information is not full in line " + count);
-
-        for (String field : fields) {
-            if (field == null || field.isEmpty())
-                throw new MappingException("Order's information has empty property in line " + count);
-        }
 
         long id = Long.parseLong(fields[0]);
         User user = userRepository.findById(Long.parseLong(fields[1]));
         Room room = roomRepository.findById(Long.parseLong(fields[2]));
 
-        Date dateFrom;
+        Date dateFrom = null;
         try {
             dateFrom = dateFormat.parse(fields[3]);
         } catch (ParseException e) {
-            throw new MappingException("Order " + id + " has injured data in field dateFrom in line " + count + ". " + e.getMessage());
+            System.err.println("Date format exception");
         }
 
-        Date dateTo;
+        Date dateTo = null;
         try {
             dateTo = dateFormat.parse(fields[4]);
         } catch (ParseException e) {
-            throw new MappingException("Order " + id + " has injured data in field dateTO in line " + count + ". " + e.getMessage());
+            System.err.println("Date format exception");
         }
 
         double moneyPaid = Double.parseDouble(fields[5]);

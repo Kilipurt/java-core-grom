@@ -1,6 +1,5 @@
 package lesson36.repositories;
 
-import lesson36.exceptions.MappingException;
 import lesson36.models.Hotel;
 
 import java.util.ArrayList;
@@ -22,22 +21,22 @@ public class HotelRepository extends GenericRepository<Hotel> {
     }
 
     @Override
-    public boolean isObjectExist(Hotel hotel) throws MappingException {
+    public boolean isObjectExist(Hotel hotel) {
         return super.isObjectExist(hotel);
     }
 
     @Override
-    public ArrayList<Hotel> getAll() throws MappingException {
+    public ArrayList<Hotel> getAll() {
         return super.getAll();
     }
 
     @Override
-    public Hotel findById(long id) throws MappingException {
+    public Hotel findById(long id) {
         return super.findById(id);
     }
 
     @Override
-    public Hotel find(Hotel hotel) throws MappingException {
+    public Hotel find(Hotel hotel) {
         return super.find(hotel);
     }
 
@@ -47,16 +46,8 @@ public class HotelRepository extends GenericRepository<Hotel> {
     }
 
     @Override
-    public Hotel map(String obj, int count) throws MappingException {
+    public Hotel map(String obj) {
         String[] fields = obj.split("([,][ ])");
-
-        if (fields.length != 5)
-            throw new MappingException("Hotel's information is not full in line " + count);
-
-        for (String field : fields) {
-            if (field == null || field.isEmpty())
-                throw new MappingException("Hotel's information has empty property in line " + count);
-        }
 
         return new Hotel(Long.parseLong(fields[0]), fields[1], fields[2], fields[3], fields[4]);
     }

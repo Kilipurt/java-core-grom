@@ -1,5 +1,6 @@
 package lesson36.services;
 
+import lesson36.exceptions.BadRequestException;
 import lesson36.models.Filter;
 import lesson36.models.Room;
 import lesson36.repositories.RoomRepository;
@@ -10,6 +11,8 @@ public class RoomService {
     private RoomRepository roomRepository = new RoomRepository();
 
     public void addRoom(Room room) throws Exception {
+        validate(room);
+
         roomRepository.create(room);
     }
 
@@ -17,7 +20,7 @@ public class RoomService {
         roomRepository.remove(roomRepository.findById(roomId));
     }
 
-    public ArrayList<Room> findRooms(Filter filter) throws Exception {
+    public ArrayList<Room> findRooms(Filter filter) {
         ArrayList<Room> allRooms = roomRepository.getAll();
 
         ArrayList<Room> searchedRoomsByCountry = searchRoomsByCountry(filter.getCountry(), allRooms);
@@ -132,5 +135,19 @@ public class RoomService {
         }
 
         return searchedRooms;
+    }
+
+    private void validate(Room room) throws BadRequestException {
+        if(room.getNumberOfGuests() <= 0)
+            throw new BadRequestException("Wrong enter number of guests");
+
+        if(room.getPrice() <= 0)
+            throw new BadRequestException("Wrong enter price");
+
+        if(room.getDateAvailableFrom() == null)
+            throw new BadRequestException("Wrong enter start date of available");
+
+        if(room.getHotel() == null)
+            throw new BadRequestException("Wrong enter hotel");
     }
 }

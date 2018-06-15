@@ -1,6 +1,5 @@
 package lesson36.repositories;
 
-import lesson36.exceptions.MappingException;
 import lesson36.models.User;
 import lesson36.models.UserType;
 
@@ -23,7 +22,7 @@ public class UserRepository extends GenericRepository<User> {
     }
 
     @Override
-    public boolean isObjectExist(User user) throws MappingException {
+    public boolean isObjectExist(User user) {
         return super.isObjectExist(user);
     }
 
@@ -33,26 +32,18 @@ public class UserRepository extends GenericRepository<User> {
     }
 
     @Override
-    public ArrayList<User> getAll() throws MappingException {
+    public ArrayList<User> getAll() {
         return super.getAll();
     }
 
     @Override
-    public User findById(long id) throws MappingException {
+    public User findById(long id) {
         return super.findById(id);
     }
 
     @Override
-    public User map(String obj, int count) throws MappingException {
+    public User map(String obj) {
         String[] fields = obj.split("([,][ ])");
-
-        if (fields.length != 5)
-            throw new MappingException("User's information is not full in line " + count);
-
-        for (String field : fields) {
-            if (field == null || field.isEmpty())
-                throw new MappingException("User's information has empty property in line " + count);
-        }
 
         return new User(Long.parseLong(fields[0]), fields[1], fields[2], fields[3], UserType.valueOf(fields[4]));
     }

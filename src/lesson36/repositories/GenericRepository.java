@@ -1,7 +1,5 @@
 package lesson36.repositories;
 
-import lesson36.exceptions.MappingException;
-import lesson36.exceptions.ObjectAlreadyExistException;
 import lesson36.exceptions.ObjectNotFoundException;
 import lesson36.models.Entity;
 
@@ -18,9 +16,6 @@ public abstract class GenericRepository<T extends Entity> {
     }
 
     public T create(T t) throws Exception {
-        if (isObjectExist(t))
-            throw new ObjectAlreadyExistException("Object already exist");
-
         generateId(t);
 
         try (BufferedWriter bw = new BufferedWriter(new FileWriter(path, true))) {
@@ -38,7 +33,7 @@ public abstract class GenericRepository<T extends Entity> {
         return t;
     }
 
-    public boolean isObjectExist(T t) throws MappingException {
+    public boolean isObjectExist(T t) {
         if (getAll().size() == 0)
             return false;
 
@@ -51,7 +46,7 @@ public abstract class GenericRepository<T extends Entity> {
         return false;
     }
 
-    private void generateId(T t) throws MappingException {
+    private void generateId(T t) {
         boolean flag = true;
         while (flag) {
             t.setId((long) (Math.random() * 50000000));
@@ -60,7 +55,7 @@ public abstract class GenericRepository<T extends Entity> {
         }
     }
 
-    public ArrayList<T> getAll() throws MappingException {
+    public ArrayList<T> getAll() {
         StringBuffer allObjects = new StringBuffer();
 
         try (BufferedReader br = new BufferedReader(new FileReader(path))) {
@@ -77,7 +72,7 @@ public abstract class GenericRepository<T extends Entity> {
         return mapAll(allObjects);
     }
 
-    public T findById(long id) throws MappingException {
+    public T findById(long id) {
         ArrayList<T> all = getAll();
 
         if (all.size() == 0)
@@ -91,7 +86,7 @@ public abstract class GenericRepository<T extends Entity> {
         return null;
     }
 
-    public T find(T t) throws MappingException {
+    public T find(T t) {
         for (T obj : getAll()) {
             if (obj != null && obj.equals(t)) {
                 return obj;
@@ -125,27 +120,16 @@ public abstract class GenericRepository<T extends Entity> {
         }
     }
 
-    public abstract T map(String obj, int count) throws MappingException;
+    public abstract T map(String obj);
 
-    private ArrayList<T> mapAll(StringBuffer all) throws MappingException {
+    private ArrayList<T> mapAll(StringBuffer all) {
         ArrayList<T> allObjects = new ArrayList<>();
-
-        if (all.length() == 0)
-            return allObjects;
 
         String[] objects = Pattern.compile("\r\n").split(all);
 
-        if (objects.length == 0)
-            return allObjects;
-
-        int count = 0;
         for (String obj : objects) {
-            if (obj == null || obj.isEmpty())
-                throw new MappingException("Data was injured in line " + count);
 
-            allObjects.add(map(obj, count));
-
-            count++;
+            allObjects.add(map(obj));
         }
 
         return allObjects;
