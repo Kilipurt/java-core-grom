@@ -5,22 +5,22 @@ import lesson36.models.User;
 import lesson36.services.UserService;
 
 public class UserController {
+    private Session session = new Session();
     private UserService userService = new UserService();
-    private static User authorizedUser;
-
-    public User getAuthorizedUser() {
-        return authorizedUser;
-    }
-
-    public void logout() throws Exception {
-        if (authorizedUser == null)
-            throw new BadRequestException("User is not authorized");
-
-        authorizedUser = null;
-    }
 
     public void registerUser(User user) throws Exception {
         userService.registerUser(user);
+    }
+
+    public void removeAccount(User user) throws Exception {
+        userService.removeAccount(user);
+    }
+
+    public void logout() throws Exception {
+        if (session.getAuthorizedUser() == null)
+            throw new BadRequestException("User is not authorized");
+
+        Session.setAuthorizedUser(null);
     }
 
     public void login(String userName, String password) throws Exception {
@@ -30,10 +30,6 @@ public class UserController {
         if (password == null || password.isEmpty())
             throw new BadRequestException("Wrong enter password");
 
-        authorizedUser = userService.login(userName, password);
-    }
-
-    public void removeAccount(User user) throws Exception {
-        userService.removeAccount(user);
+        Session.setAuthorizedUser(userService.login(userName, password));
     }
 }

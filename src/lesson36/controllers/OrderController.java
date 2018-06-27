@@ -6,20 +6,20 @@ import lesson36.services.OrderService;
 import java.util.Date;
 
 public class OrderController {
-    private UserController userController = new UserController();
+    private Session session = new Session();
     private OrderService orderService = new OrderService();
 
     public void bookRoom(long roomId, Date dateFrom, Date dateTo) throws Exception {
-        if (userController.getAuthorizedUser() == null)
+        if (session.getAuthorizedUser() == null)
             throw new AuthorizeException("User is not authorized");
 
-        orderService.bookRoom(roomId, userController.getAuthorizedUser(), dateFrom, dateTo);
+        orderService.bookRoom(roomId, session.getAuthorizedUser(), dateFrom, dateTo);
     }
 
     public void cancelReservation(long roomId) throws Exception {
-        if (userController.getAuthorizedUser() == null)
+        if (session.getAuthorizedUser() == null)
             throw new AuthorizeException("User is not authorized");
 
-        orderService.cancelReservation(roomId, userController.getAuthorizedUser().getId());
+        orderService.cancelReservation(roomId, session.getAuthorizedUser().getId());
     }
 }

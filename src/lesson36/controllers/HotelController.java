@@ -7,7 +7,7 @@ import lesson36.services.HotelService;
 
 public class HotelController {
     private HotelService hotelService = new HotelService();
-    private UserController userController = new UserController();
+    private Session session = new Session();
 
     public void addHotel(Hotel hotel) throws Exception {
         validateUserRights();
@@ -20,7 +20,7 @@ public class HotelController {
     }
 
     public Hotel findHotelByCity(String city) throws Exception {
-        if (userController.getAuthorizedUser() == null)
+        if (session.getAuthorizedUser() == null)
             throw new AuthorizeException("User is not authorized");
 
         if (city == null || city.isEmpty())
@@ -30,17 +30,17 @@ public class HotelController {
     }
 
     public Hotel findHotelByName(String name) throws Exception {
-        if (userController.getAuthorizedUser() == null)
+        if (session.getAuthorizedUser() == null)
             throw new AuthorizeException("User is not authorized");
 
         return hotelService.findHotelByName(name);
     }
 
     private void validateUserRights() throws AuthorizeException {
-        if (userController.getAuthorizedUser() == null)
+        if (session.getAuthorizedUser() == null)
             throw new AuthorizeException("User is not authorized");
 
-        if (userController.getAuthorizedUser().getUserType() != UserType.ADMIN)
-            throw new AuthorizeException("User with id " + userController.getAuthorizedUser().getId() + " does not enough rights");
+        if (session.getAuthorizedUser().getUserType() != UserType.ADMIN)
+            throw new AuthorizeException("User with id " + session.getAuthorizedUser().getId() + " does not enough rights");
     }
 }

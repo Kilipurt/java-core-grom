@@ -9,7 +9,7 @@ import lesson36.services.RoomService;
 import java.util.ArrayList;
 
 public class RoomController {
-    private UserController userController = new UserController();
+    private Session session = new Session();
     private RoomService roomService = new RoomService();
 
     public void addRoom(Room room) throws Exception {
@@ -25,7 +25,7 @@ public class RoomController {
     }
 
     public ArrayList<Room> findRooms(Filter filter) throws Exception {
-        if (userController.getAuthorizedUser() == null)
+        if (session.getAuthorizedUser() == null)
             throw new AuthorizeException("User is not authorized");
 
         if (filter == null)
@@ -35,10 +35,10 @@ public class RoomController {
     }
 
     private void validateUserRights() throws AuthorizeException {
-        if (userController.getAuthorizedUser() == null)
+        if (session.getAuthorizedUser() == null)
             throw new AuthorizeException("User is not authorized");
 
-        if (userController.getAuthorizedUser().getUserType() != UserType.ADMIN)
-            throw new AuthorizeException("User with id " + userController.getAuthorizedUser().getId() + " does not enough rights");
+        if (session.getAuthorizedUser().getUserType() != UserType.ADMIN)
+            throw new AuthorizeException("User with id " + session.getAuthorizedUser().getId() + " does not enough rights");
     }
 }
